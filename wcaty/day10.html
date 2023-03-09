@@ -1,0 +1,658 @@
+<!DOCTYPE HTML>
+<!--
+	Editorial by HTML5 UP
+	html5up.net | @ajlkn
+	Free for personal and commercial use under the CCA 3.0 license (html5up.net/license)
+-->
+<html>
+	<head>
+		<title>Day 10</title>
+		<meta charset="utf-8" />
+		<meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no" />
+		<link rel="stylesheet" href="assets/css/main.css" />
+	</head>
+	<body class="is-preload">
+
+		<!-- Wrapper -->
+			<div id="wrapper">
+			<p id = "top">
+
+				<!-- Main -->
+					<div id="main">
+						<div class="inner">
+
+							<!-- Header -->
+								<header id="header">
+									<a href="index.html" class="logo"><strong>Young Ko</strong> at WCATY</a>
+									<ul class="icons">
+										<li><a href="#" class="icon brands fa-twitter"><span class="label">Twitter</span></a></li>
+										<li><a href="#" class="icon brands fa-facebook-f"><span class="label">Facebook</span></a></li>
+										<li><a href="#" class="icon brands fa-snapchat-ghost"><span class="label">Snapchat</span></a></li>
+										<li><a href="#" class="icon brands fa-instagram"><span class="label">Instagram</span></a></li>
+										<li><a href="#" class="icon brands fa-medium-m"><span class="label">Medium</span></a></li>
+									</ul>
+								</header>
+
+							<!-- Content -->
+								<section>
+									<header class="main">
+										<h1>Day 10</h1>
+									</header>
+
+									<p> Thursday, July 11, 2019 </p>
+
+									<h3>Schedule</h3>
+										<div class="row">
+											<div class="col-6 col-12-small">
+
+												<h4>Questions</h4>
+												<ol>
+													<li>How do I write less code?</li>
+													<li>If I encounter a new ADS, what should I look for?</li>
+												</ol>
+
+											</div>
+											<div class="col-6 col-12-small">
+
+												<h4>Concepts</h4>
+												<ul>
+													<li>Classes</li>
+													<li>CRUD</li>
+													<li>Big-O considerations in ADS design</li>
+													<li>User-friendliness in ADS design</li>
+													<li>User-error in ADS design</li>
+												</ul>
+
+											</div>
+										</div>
+
+									<span class="image main"><a href="images/day10/hamturtle.png"><img src="images/day10/hamturtle.png" alt="" /></a></span>
+
+									<!-- Content -->
+									<h2>Title</h2>
+									<p>Content</p>
+
+									<p id = "code">
+									<h2>Code</h2>
+									<p id = "HamTurtle.java">
+									<h4><i>HamTurtle.java</i></h4>
+									<p>Learned about </p>
+									<pre><code>import java.awt.EventQueue;
+import javax.swing.JFrame;
+
+public class Pikachu extends JFrame {
+
+    public Pikachu() {
+
+        initUI();
+    }
+
+    private void initUI() {
+
+        add(new Board());
+
+        setResizable(false);
+        pack();
+
+        setTitle("Pikachu Rain");
+        setLocationRelativeTo(null);
+        setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+    }
+
+    public static void main(String[] args) {
+
+        EventQueue.invokeLater(() -> {
+            JFrame ex = new Pikachu();
+            ex.setVisible(true);
+        });
+    }
+}
+									</code></pre>
+									<p id = "Board.java">
+									<h4><i>Board.java</i></h4>
+									<p>Learned about </p>
+									<pre><code>import java.awt.Color;
+import java.awt.Dimension;
+import java.awt.Font;
+import java.awt.FontMetrics;
+import java.awt.Graphics;
+import java.awt.Image;
+import java.awt.Toolkit;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
+import java.awt.event.KeyAdapter;
+import java.awt.event.KeyEvent;
+import javax.swing.ImageIcon;
+import javax.swing.JPanel;
+import javax.swing.Timer;
+import java.util.*;
+
+public class Board extends JPanel implements ActionListener {
+    private Random RNG = new Random();
+
+    private final int B_WIDTH = 1920;
+    private final int B_HEIGHT = 1080;
+    private final int DOT_SIZE = 10;
+    //private final int ALL_DOTS = 900;
+    private final int RAND_POS = 190;
+    private final int DELAY = 4;
+
+    private int i = 0;
+
+    private int user_x;
+    private int user_y;
+
+    private final int user_speed = 5;
+
+    private double turtle_speed = 1;
+    private double turtle2_speed = 1;
+    private double turtle3_speed = 1;
+    private double turtle4_speed = 1;
+    private double turtle5_speed = 1;
+    private double turtle6_speed = 1;
+
+    private int x_delta;
+    private int y_delta;
+
+    private int points;
+    private int turtle_x;
+    private double turtle_y;
+
+    private int turtle2_x;
+    private double turtle2_y;
+
+    private int turtle3_x;
+    private double turtle3_y;
+
+    private int turtle4_x;
+    private double turtle4_y;
+
+    private int turtle5_x;
+    private double turtle5_y;
+
+    private int turtle6_x;
+    private double turtle6_y;
+
+    private int turtle_int_y;
+    private int turtle2_int_y;
+    private int turtle3_int_y;
+    private int turtle4_int_y;
+    private int turtle5_int_y;
+    private int turtle6_int_y;
+
+
+    private boolean leftDirection = false;
+    private boolean rightDirection = false;
+    //private boolean upDirection = false;
+    //private boolean downDirection = false;
+    private boolean inGame = true;
+
+    private Timer timer;
+    //private Image ball;
+    private Image turtle_image;
+    private Image user_image;
+    private Image wallpaper_image;
+
+    public Board() {
+
+        initBoard();
+    }
+
+    private void initBoard() {
+
+        addKeyListener(new TAdapter());
+        setBackground(Color.black);
+        setFocusable(true);
+
+        setPreferredSize(new Dimension(B_WIDTH, B_HEIGHT));
+        loadImages();
+        initGame();
+    }
+
+    private void loadImages() {
+
+        /*
+        ImageIcon image_dot = new ImageIcon("src/resources/dot.png");
+        ball = image_dot.getImage();
+
+        ImageIcon image_apple = new ImageIcon("src/resources/apple.png");
+        apple = image_apple.getImage();
+
+        ImageIcon image_head = new ImageIcon("src/resources/head.png");
+        head = image_head.getImage();
+        */
+
+        ImageIcon image_turtle = new ImageIcon("resources/ham.png");
+        turtle_image = image_turtle.getImage();
+
+        ImageIcon image_user = new ImageIcon("resources/turtle.png");
+        user_image = image_user.getImage();
+
+        ImageIcon image_wallpaper = new ImageIcon("resources/background.png");
+        wallpaper_image = image_wallpaper.getImage();
+
+    }
+
+    private void initGame() {
+
+        points = 0;
+
+        user_x = B_WIDTH / 2;
+        user_y = B_HEIGHT - 220;
+
+        //x_delta = 1;
+        //y_delta = 0;
+
+        locateturtle();
+        locateturtle2();
+        locateturtle3();
+        locateturtle4();
+        locateturtle5();
+        locateturtle6();
+
+        timer = new Timer(DELAY, this);
+        timer.start();
+    }
+
+    @Override
+    public void paintComponent(Graphics g) {
+        super.paintComponent(g);
+
+        doDrawing(g);
+    }
+
+    private void doDrawing(Graphics g) {
+
+        if (inGame) {
+
+          turtle_int_y = (int) Math.round(turtle_y);
+          turtle2_int_y = (int) Math.round(turtle2_y);
+          turtle3_int_y = (int) Math.round(turtle3_y);
+          turtle4_int_y = (int) Math.round(turtle4_y);
+          turtle5_int_y = (int) Math.round(turtle5_y);
+          turtle6_int_y = (int) Math.round(turtle6_y);
+
+            g.drawImage(wallpaper_image, 0, 0, B_WIDTH, B_HEIGHT, this);
+
+            g.drawImage(turtle_image, turtle_x, turtle_int_y, 60, 60, this);
+
+            g.drawImage(turtle_image, turtle2_x, turtle2_int_y, 60, 60, this);
+            g.drawImage(turtle_image, turtle3_x, turtle3_int_y, 60, 60, this);
+            g.drawImage(turtle_image, turtle4_x, turtle4_int_y, 60, 60, this);
+            g.drawImage(turtle_image, turtle5_x, turtle5_int_y, 60, 60, this);
+            g.drawImage(turtle_image, turtle6_x, turtle6_int_y, 60, 60, this);
+
+            g.drawImage(user_image, user_x, user_y, 135, 75, this);
+
+            String msg_score = "Your Score : " + points;
+            Font small = new Font("Helvetica", Font.BOLD, 20);
+            FontMetrics metr = getFontMetrics(small);
+            g.setColor(Color.black);
+            g.setFont(small);
+            g.drawString(msg_score, 20, 30);
+
+            Toolkit.getDefaultToolkit().sync();
+
+        } else {
+
+            gameOver(g);
+        }
+    }
+
+    private void gameOver(Graphics g) {
+
+        String msg = "Your Score : " + points;
+        Font small = new Font("Helvetica", Font.BOLD, 40);
+        FontMetrics metr = getFontMetrics(small);
+
+        g.setColor(Color.white);
+        g.setFont(small);
+        g.drawString(msg, (B_WIDTH - metr.stringWidth(msg)) / 2, B_HEIGHT / 2);
+
+    }
+
+    private void checkturtle() {
+
+        if ((-60 <= user_x-turtle_x && user_x-turtle_x <= 135) && (-60 <= user_y-turtle_y && user_y-turtle_y <= 60)) {
+            points++;
+            System.out.println(points);
+            locateturtle();
+        }
+        if ((-60 <= user_x-turtle2_x && user_x-turtle2_x <= 135) && (-60 <= user_y-turtle2_y && user_y-turtle2_y <= 60)) {
+            points++;
+            System.out.println(points);
+            locateturtle2();
+        }
+        if ((-60 <= user_x-turtle3_x && user_x-turtle3_x <= 135) && (-60 <= user_y-turtle3_y && user_y-turtle3_y <= 60)) {
+            points++;
+            System.out.println(points);
+            locateturtle3();
+        }
+        if ((-60 <= user_x-turtle4_x && user_x-turtle4_x <= 135) && (-60 <= user_y-turtle4_y && user_y-turtle4_y <= 60)) {
+            points++;
+            System.out.println(points);
+            locateturtle4();
+        }
+        if ((-60 <= user_x-turtle5_x && user_x-turtle5_x <= 135) && (-60 <= user_y-turtle5_y && user_y-turtle5_y <= 60)) {
+            points++;
+            System.out.println(points);
+            locateturtle5();
+        }
+        if ((-60 <= user_x-turtle6_x && user_x-turtle6_x <= 135) && (-60 <= user_y-turtle6_y && user_y-turtle6_y <= 60)) {
+            points++;
+            System.out.println(points);
+            locateturtle6();
+        }
+    }
+
+    private void move() {
+
+        if (leftDirection) {
+            //x_delta = -1 * user_speed;
+
+            if (i > 10){
+              i = 0;
+              leftDirection = false;
+            }
+            user_x = user_x - user_speed;
+            i += 1;
+        }
+
+        if (rightDirection) {
+            //x_delta = 1 * user_speed;
+            if (i > 10){
+              i = 0;
+              rightDirection = false;
+            }
+            user_x = user_x + user_speed;
+            i += 1;
+        }
+
+        if(!rightDirection && !leftDirection){
+          x_delta = 0;
+        }
+
+        user_x = user_x + x_delta;
+        user_y = user_y + y_delta;
+
+        turtle_y = turtle_y + 1 * turtle_speed;
+        turtle2_y = turtle2_y + 1 * turtle2_speed;
+        turtle3_y = turtle3_y + 1 * turtle3_speed;
+        turtle4_y = turtle4_y + 1 * turtle4_speed;
+        turtle5_y = turtle5_y + 1 * turtle5_speed;
+        turtle6_y = turtle6_y + 1 * turtle6_speed;
+
+        if(user_x < 0){
+          user_x = B_WIDTH;
+        }
+
+        if(user_x > B_WIDTH){
+          user_x = 0;
+        }
+
+        if(turtle_y > B_HEIGHT){
+          locateturtle();
+        }
+        if(turtle2_y > B_HEIGHT){
+          locateturtle2();
+        }
+        if(turtle3_y > B_HEIGHT){
+          locateturtle3();
+        }
+        if(turtle4_y > B_HEIGHT){
+          locateturtle4();
+        }
+        if(turtle5_y > B_HEIGHT){
+          locateturtle5();
+        }
+        if(turtle6_y > B_HEIGHT){
+          locateturtle6();
+        }
+
+    }
+
+    private void locateturtle() {
+
+        int r = (int) (Math.random() * RAND_POS);
+        turtle_x = ((r * DOT_SIZE));
+
+        turtle_speed = Math.random() + 1;
+
+        //r = (int) (Math.random() * RAND_POS);
+        //turtle_y = ((r * DOT_SIZE));
+        turtle_y = 50;
+
+    }
+    private void locateturtle2() {
+
+        int r = (int) (Math.random() * RAND_POS);
+        turtle2_x = ((r * DOT_SIZE));
+
+        turtle2_speed = Math.random() + 1;
+
+        //r = (int) (Math.random() * RAND_POS);
+        //turtle_y = ((r * DOT_SIZE));
+        turtle2_y = 50;
+
+    }
+    private void locateturtle3() {
+
+        int r = (int) (Math.random() * RAND_POS);
+        turtle3_x = ((r * DOT_SIZE));
+
+        turtle3_speed = Math.random() + 1;
+        //r = (int) (Math.random() * RAND_POS);
+        //turtle_y = ((r * DOT_SIZE));
+        turtle3_y = 50;
+
+    }
+    private void locateturtle4() {
+
+        int r = (int) (Math.random() * RAND_POS);
+        turtle4_x = ((r * DOT_SIZE));
+
+        turtle4_speed = Math.random() + 1;
+
+        //r = (int) (Math.random() * RAND_POS);
+        //turtle_y = ((r * DOT_SIZE));
+        turtle4_y = 50;
+
+    }
+    private void locateturtle5() {
+
+        int r = (int) (Math.random() * RAND_POS);
+        turtle5_x = ((r * DOT_SIZE));
+
+        turtle5_speed = Math.random() + 1;
+
+        //r = (int) (Math.random() * RAND_POS);
+        //turtle_y = ((r * DOT_SIZE));
+        turtle5_y = 50;
+
+    }
+    private void locateturtle6() {
+
+        int r = (int) (Math.random() * RAND_POS);
+        turtle6_x = ((r * DOT_SIZE));
+
+        turtle6_speed = Math.random() + 1;
+
+        //r = (int) (Math.random() * RAND_POS);
+        //turtle_y = ((r * DOT_SIZE));
+        turtle6_y = 50;
+
+    }
+
+    @Override
+    public void actionPerformed(ActionEvent e) {
+
+        checkturtle();
+        move();
+
+        repaint();
+    }
+
+    private class TAdapter extends KeyAdapter {
+
+        @Override
+        public void keyPressed(KeyEvent e) {
+
+            int key = e.getKeyCode();
+
+            if (key == KeyEvent.VK_LEFT) {
+                leftDirection = true;
+                rightDirection = false;
+            }
+
+            if (key == KeyEvent.VK_RIGHT) {
+                leftDirection = false;
+                rightDirection = true;
+            }
+
+            if (key == KeyEvent.VK_UP){
+              inGame = false;
+            }
+        }
+    }
+}
+									</code></pre>
+									<div class="box alt">
+										<div class="row gtr-50 gtr-uniform">
+											<div class="col-4"><span class="image fit"><a href="images/day10/hamturtle.png"><img src="images/day10/hamturtle.png" alt="" /></a></span></div>
+										</div>
+									</div>
+
+								</section>
+
+						</div>
+					</div>
+
+				<!-- Sidebar -->
+					<div id="sidebar">
+						<div class="inner">
+
+							<!-- Search -->
+								<section id="search" class="alt">
+									<form method="post" action="#">
+										<input type="text" name="query" id="query" placeholder="Search" />
+									</form>
+								</section>
+
+							<!-- Menu -->
+								<nav id="menu">
+									<header class="major">
+										<h2>Menu</h2>
+									</header>
+									<ul>
+										<li><a href="index.html">Homepage</a></li>
+										<li><a href="about_me.html">About me</a></li>
+										<li><a href="about_ksa.html">About KSA</a></li>
+										<li><a href="about_wcaty.html">About WCATY</a></li>
+										<li>
+											<span class="opener">Portfolio - Week 1</span>
+											<ul>
+												<li><a href="day0.html">Day 0</a></li>
+												<li><a href="day1.html">Day 1</a></li>
+												<li><a href="day2.html">Day 2</a></li>
+												<li><a href="day3.html">Day 3</a></li>
+												<li><a href="day4.html">Day 4</a></li>
+												<li><a href="day5.html">Day 5</a></li>
+											</ul>
+										</li>
+										<li>
+											<span class="opener">Portfolio - Week 2</span>
+											<ul>
+												<li><a href="day6.html">Day 6</a></li>
+												<li><a href="day7.html">Day 7</a></li>
+												<li><a href="day8.html">Day 8</a></li>
+												<li><a href="day9.html">Day 9</a></li>
+												<li><a href="day10.html">Day 10</a></li>
+												<li><a href="day11.html">Day 11</a></li>
+											</ul>
+										</li>
+										<li>
+											<span class="opener">Portfolio - Week 3</span>
+											<ul>
+												<li><a href="day12.html">Day 12</a></li>
+												<li><a href="day13.html">Day 13</a></li>
+												<li><a href="day14.html">Day 14</a></li>
+												<li><a href="day15.html">Day 15</a></li>
+												<li><a href="day16.html">Day 16</a></li>
+												<li><a href="day17.html">Day 17</a></li>
+											</ul>
+										</li>
+										<li>
+											<span class="opener">Projects</span>
+											<ul>
+												<li><a href="pikachu.html">Project Pikachu</a></li>
+												<li><a href="portfolio.html">Project Portfolio</a></li>
+												<li><a href="final.html">Final group project</a></li>
+											</ul>
+										</li>
+									</ul>
+								</nav>
+
+							<!-- Section -->
+							
+								<section>
+									<header class="major">
+										<h2>Important News</h2>
+									</header>
+									<div class="mini-posts">
+										<article>
+											<a href="#" class="image"><img src="images/pic07.jpg" alt="" /></a>
+											<p>July 20th, finally the WCATY camp ends.</p>
+										</article>
+										
+									</div>
+									<ul class="actions">
+										<li><a href="about_wcaty.html" class="button">More</a></li>
+									</ul>
+								</section>
+							
+
+							<!-- Section -->
+								<section>
+									<header class="major">
+										<h2>Get in touch</h2>
+									</header>
+									<p>You can contact me through the contact information below.</p>
+									<ul class="contact">
+										<li class="icon solid fa-envelope"><a href="#">ksa18ky@gmail.com</a></li>
+										<li class="icon solid fa-phone">(+82)10-9984-1915</li>
+										<li class="icon solid fa-home">31, Myeongdal-ro 6-gil, Seocho-gu<br />
+										Seoul, Republic of Korea</li>
+									</ul>
+								</section>
+								
+								<section>
+								<header class="major">
+									<h2>Shortcuts</h2>
+								</header>
+								<p>
+									<a href = "#top">Top</a><br><br>
+									<a href = "#code">Code</a><br>
+									- <a href = "#HamTurtle.java">HamTurtle.java</a><br>
+									- <a href = "#Board.java">Board.java</a><br>
+								</p>
+								</section>
+
+								<footer id="footer">
+									<p class="copyright">&copy; Young Ko. All rights reserved. <br />
+									Demo Images: <a href="https://unsplash.com">Unsplash</a>. Design: <a href="https://html5up.net">HTML5 UP</a>.</p>
+								</footer>
+
+						</div>
+					</div>
+
+			</div>
+
+		<!-- Scripts -->
+			<script src="assets/js/jquery.min.js"></script>
+			<script src="assets/js/browser.min.js"></script>
+			<script src="assets/js/breakpoints.min.js"></script>
+			<script src="assets/js/util.js"></script>
+			<script src="assets/js/main.js"></script>
+
+	</body>
+</html>

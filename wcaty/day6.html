@@ -1,0 +1,284 @@
+<!DOCTYPE HTML>
+<!--
+	Editorial by HTML5 UP
+	html5up.net | @ajlkn
+	Free for personal and commercial use under the CCA 3.0 license (html5up.net/license)
+-->
+<html>
+	<head>
+		<title>Day 6</title>
+		<meta charset="utf-8" />
+		<meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no" />
+		<link rel="stylesheet" href="assets/css/main.css" />
+	</head>
+	<body class="is-preload">
+
+		<!-- Wrapper -->
+			<div id="wrapper">
+			<p id = "top">
+
+				<!-- Main -->
+					<div id="main">
+						<div class="inner">
+
+							<!-- Header -->
+								<header id="header">
+									<a href="index.html" class="logo"><strong>Young Ko</strong> at WCATY</a>
+									<ul class="icons">
+										<li><a href="#" class="icon brands fa-twitter"><span class="label">Twitter</span></a></li>
+										<li><a href="#" class="icon brands fa-facebook-f"><span class="label">Facebook</span></a></li>
+										<li><a href="#" class="icon brands fa-snapchat-ghost"><span class="label">Snapchat</span></a></li>
+										<li><a href="#" class="icon brands fa-instagram"><span class="label">Instagram</span></a></li>
+										<li><a href="#" class="icon brands fa-medium-m"><span class="label">Medium</span></a></li>
+									</ul>
+								</header>
+
+							<!-- Content -->
+								<section>
+									<header class="main">
+										<h1>Day 6</h1>
+									</header>
+
+									<p> Sunday, July 7, 2019 </p>
+
+									<h3>Schedule</h3>
+									
+										<h4>Activities</h4>
+										<ul>
+											<li>Week 1 review</li>
+											<li>Guided practice : Random walk statistics in different configurations (Mean time to travel x distance)</li>
+										</ul>
+
+									<span class="image main"><img src="images/pic11.jpg" alt="" /></span>
+
+									<!-- Content -->
+									<h2>Title</h2>
+									<p>Content</p>
+
+									<p id = "code">
+									<h2>Code</h2>
+									<p id = "DizzyCurve_Re.py">
+									<h4><i>DizzyCurve_Re.py</i></h4>
+									<p>Learned about ===== Instruction =====
+1. Input the distance X
+2. Input an integer for the numbers of attempts
+
+3. It will print average number of moves for distance X
+4. It also print the maximum and minimum of moves</p>
+									<pre><code>import turtle
+import random
+
+a = turtle.Turtle()
+a.speed(0)
+initX, initY = a.pos()
+
+k = 0
+total = 0
+count_time = 0
+distance = 0.0
+
+min_time = 100
+max_time = 0
+    
+x = float(input("What is the distance X? "))
+attempt = int(input("How many attempts? "))
+
+def init():
+    
+    r = random.random()
+    g = random.random()
+    b = random.random()
+    
+    a.color(r, g, b)
+
+def dis(x1, y1, x2, y2):
+    return ((x2-x1)**2 + (y2-y1)**2)**0.5
+
+def random_move():
+    angle = random.randint(0, 359)
+            
+    a.forward(10)
+    a.right(angle)
+
+for i in range(attempt):
+    
+    init()
+    startX, startY = a.pos()
+    
+    while k == 0:
+        random_move()
+        
+        endX, endY = a.pos()    
+        distance = dis(startX, startY, endX, endY)
+        
+        count_time += 1
+        
+        if (distance > x):
+            print ("Attempt {} -> {} moves". format(i, count_time))
+            if (count_time > max_time):
+                max_time = count_time
+            if (count_time < min_time):
+                min_time = count_time
+            total = total + count_time
+            count_time = 0
+            k = 1
+    k = 0
+    
+    
+print ("")
+print ("====================")
+print ("Average = {} moves". format(total / attempt))
+print ("Maximum = {} moves". format(max_time))
+print ("Minimum = {} moves". format(min_time))
+									</code></pre>
+									<div class="box alt">
+										<div class="row gtr-50 gtr-uniform">
+											<div class="col-4"><span class="image fit"><a href="images/day6/dizzy1.png"><img src="images/day6/dizzy1.png" alt="" /></a></span></div>
+											<div class="col-4"><span class="image fit"><a href="images/day6/dizzy2.png"><img src="images/day6/dizzy2.png" alt="" /></a></span></div>
+										</div>
+									</div>
+
+
+
+
+
+
+
+
+
+
+
+
+								</section>
+
+						</div>
+					</div>
+
+				<!-- Sidebar -->
+					<div id="sidebar">
+						<div class="inner">
+
+							<!-- Search -->
+								<section id="search" class="alt">
+									<form method="post" action="#">
+										<input type="text" name="query" id="query" placeholder="Search" />
+									</form>
+								</section>
+
+							<!-- Menu -->
+								<nav id="menu">
+									<header class="major">
+										<h2>Menu</h2>
+									</header>
+									<ul>
+										<li><a href="index.html">Homepage</a></li>
+										<li><a href="about_me.html">About me</a></li>
+										<li><a href="about_ksa.html">About KSA</a></li>
+										<li><a href="about_wcaty.html">About WCATY</a></li>
+										<li>
+											<span class="opener">Portfolio - Week 1</span>
+											<ul>
+												<li><a href="day0.html">Day 0</a></li>
+												<li><a href="day1.html">Day 1</a></li>
+												<li><a href="day2.html">Day 2</a></li>
+												<li><a href="day3.html">Day 3</a></li>
+												<li><a href="day4.html">Day 4</a></li>
+												<li><a href="day5.html">Day 5</a></li>
+											</ul>
+										</li>
+										<li>
+											<span class="opener">Portfolio - Week 2</span>
+											<ul>
+												<li><a href="day6.html">Day 6</a></li>
+												<li><a href="day7.html">Day 7</a></li>
+												<li><a href="day8.html">Day 8</a></li>
+												<li><a href="day9.html">Day 9</a></li>
+												<li><a href="day10.html">Day 10</a></li>
+												<li><a href="day11.html">Day 11</a></li>
+											</ul>
+										</li>
+										<li>
+											<span class="opener">Portfolio - Week 3</span>
+											<ul>
+												<li><a href="day12.html">Day 12</a></li>
+												<li><a href="day13.html">Day 13</a></li>
+												<li><a href="day14.html">Day 14</a></li>
+												<li><a href="day15.html">Day 15</a></li>
+												<li><a href="day16.html">Day 16</a></li>
+												<li><a href="day17.html">Day 17</a></li>
+											</ul>
+										</li>
+										<li>
+											<span class="opener">Projects</span>
+											<ul>
+												<li><a href="pikachu.html">Project Pikachu</a></li>
+												<li><a href="portfolio.html">Project Portfolio</a></li>
+												<li><a href="final.html">Final group project</a></li>
+											</ul>
+										</li>
+									</ul>
+								</nav>
+
+							<!-- Section -->
+							
+								<section>
+									<header class="major">
+										<h2>Important News</h2>
+									</header>
+									<div class="mini-posts">
+										<article>
+											<a href="#" class="image"><img src="images/pic07.jpg" alt="" /></a>
+											<p>July 20th, finally the WCATY camp ends.</p>
+										</article>
+										
+									</div>
+									<ul class="actions">
+										<li><a href="about_wcaty.html" class="button">More</a></li>
+									</ul>
+								</section>
+							
+
+							<!-- Section -->
+								<section>
+									<header class="major">
+										<h2>Get in touch</h2>
+									</header>
+									<p>You can contact me through the contact information below.</p>
+									<ul class="contact">
+										<li class="icon solid fa-envelope"><a href="#">ksa18ky@gmail.com</a></li>
+										<li class="icon solid fa-phone">(+82)10-9984-1915</li>
+										<li class="icon solid fa-home">31, Myeongdal-ro 6-gil, Seocho-gu<br />
+										Seoul, Republic of Korea</li>
+									</ul>
+								</section>
+								
+								<section>
+								<header class="major">
+									<h2>Shortcuts</h2>
+								</header>
+								<p>
+									<a href = "#top">Top</a><br><br>
+									<a href = "#code">Code</a><br>
+									- <a href = "#DizzyCurve_Re.py">DizzyCurve_Re.py</a>
+								</p>
+								</section>
+
+								<footer id="footer">
+									<p class="copyright">&copy; Young Ko. All rights reserved. <br />
+									Demo Images: <a href="https://unsplash.com">Unsplash</a>. Design: <a href="https://html5up.net">HTML5 UP</a>.</p>
+								</footer>
+
+						</div>
+					</div>
+
+			</div>
+
+		<!-- Scripts -->
+			<script src="assets/js/jquery.min.js"></script>
+			<script src="assets/js/browser.min.js"></script>
+			<script src="assets/js/breakpoints.min.js"></script>
+			<script src="assets/js/util.js"></script>
+			<script src="assets/js/main.js"></script>
+
+	</body>
+</html>

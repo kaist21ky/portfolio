@@ -1,0 +1,465 @@
+<!DOCTYPE HTML>
+<!--
+	Editorial by HTML5 UP
+	html5up.net | @ajlkn
+	Free for personal and commercial use under the CCA 3.0 license (html5up.net/license)
+-->
+<html>
+	<head>
+		<title>Day 1</title>
+		<meta charset="utf-8" />
+		<meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no" />
+		<link rel="stylesheet" href="assets/css/main.css" />
+	</head>
+	<body class="is-preload">
+
+		<!-- Wrapper -->
+			<div id="wrapper">
+			<p id = "top">
+
+				<!-- Main -->
+					<div id="main">
+						<div class="inner">
+
+							<!-- Header -->
+								<header id="header">
+									<a href="index.html" class="logo"><strong>Young Ko</strong> at WCATY</a>
+									<ul class="icons">
+										<li><a href="#" class="icon brands fa-twitter"><span class="label">Twitter</span></a></li>
+										<li><a href="#" class="icon brands fa-facebook-f"><span class="label">Facebook</span></a></li>
+										<li><a href="#" class="icon brands fa-snapchat-ghost"><span class="label">Snapchat</span></a></li>
+										<li><a href="#" class="icon brands fa-instagram"><span class="label">Instagram</span></a></li>
+										<li><a href="#" class="icon brands fa-medium-m"><span class="label">Medium</span></a></li>
+									</ul>
+								</header>
+
+							<!-- Content -->
+							
+								<section>
+									<header class="main">
+										<h1>Day 1</h1>
+									</header>
+
+									<p> Monday, July 1, 2019 </p>
+
+									<h3>Schedule</h3>
+										<div class="row">
+											<div class="col-6 col-12-small">
+
+												<h4>Questions</h4>
+												<ol>
+													<li>What is a program?</li>
+													<li>What does it mean to program?</li>
+													<li>What are the major philosophies in this space?</li>
+													<li>Pre-assessment</li>
+												</ol>
+
+											</div>
+											<div class="col-6 col-12-small">
+
+												<h4>Concepts</h4>
+												<ul>
+													<li>Von Neuman</li>
+													<li>Turing</li>
+													<li>Linux Philosophy</li>
+													<li>Black Box</li>
+													<li>Command Line</li>
+													<li>Keyboard I/O</li>
+													<li>Course Tools</li>
+													<li>Type conversions assuming no errors</li>
+												</ul>
+
+											</div>
+										</div>
+
+									<span class="image main"><img src="images/pic11.jpg" alt="" /></span>
+
+									<h2 id="content">Celebrity Problem</h2>
+
+									<div class="box">
+										<p>In a group of N people <br>
+										Celebrity : Everyone knows celebrity but celebrity doesn'y know anyone else in the group.<br>
+										Question : "Does A knows B?" &#8594 Yes / No</p>
+									</div>
+
+									<h4>Q. What is the minimum number of questions to prove A is a celebrity?</h4>
+									<p>If we ask "Does A knows B?", we can pick candidate celebrity.</p>
+									<p>If the answer is <b>Yes</b> : A is not a celebrity. (Celebrity should know nobody) <br>&#8594 Change A <br>&#8594 B is candidate celebrity.</p>
+									<p>If the answer is <b>No</b> : B is not a celebrity. (Everyone should know the celebrity) <br>&#8594 Change B <br>&#8594 A is candidate celebrity.</p>
+									<p>Repeat this until there is only one person left, who is the actual candidate celebrity. (Takes <b>N-1</b> times)</p>
+
+									<p>Now, we can think of group with normal people and the candidate celebrity separately.<br>
+									We know that this candidate is the only one who can be the celebrity, but it is not proved.<br>
+									We need <b>2(N-1)-1</b> more questions to prove that this person is a real celebrity.</p>
+									<p>2(N-1)-1 + (N-1) = <b>3(N-1)-1</b> times</p>
+
+									<h2>Several Topics</h2>
+									<ul>
+										<li>Turing machine</li>
+										<li>Pokemon MissingNo</li>
+										<li>Skyline Problem</li>
+									</ul>
+
+									<h2>Command Prompt Commands</h2>
+									<div class="table-wrapper">
+										<table>
+											<thead>
+												<tr>
+													<th>Command</th>
+													<th>Meaning</th>
+													<th>Description</th>
+												</tr>
+											</thead>
+											<tbody>
+												<tr>
+													<td>ls</td>
+													<td>List</td>
+													<td></td>
+												</tr>
+												<tr>
+													<td>mv</td>
+													<td>Move</td>
+													<td>Move file A &#8594 B can be used to rename (Just the directory changes)</td>
+												</tr>
+												<tr>
+													<td>cp</td>
+													<td>Copy</td>
+													<td></td>
+												</tr>
+												<tr>
+													<td>rm</td>
+													<td>Remove</td>
+													<td>It is not deleting the file, just forgetting the pointer(Directory) of file</td>
+												</tr>
+												<tr>
+													<td>touch</td>
+													<td>Touch</td>
+													<td>Updating timestamp &#8594 Can be used in making new files</td>
+												</tr>
+											</tbody>
+										</table>
+									</div>
+
+									<h2>Good Ideas?</h2>
+									<ul>
+										<li>Website for pirates who are really into Rubiks cubes</li>
+										<li>Text based adventure about going to lunch</li>
+										<li>Recipe app all about cheese</li>
+										<li>Social media for people who read clocks upside down</li>
+										<li>Web shop for water bottles with holes in them</li>
+										<li>Action adventure where you fight only with your calculus book</li>
+										<li>FPS, but oddly realistic</li>
+										<li>Image board all about wearing shades inside</li>
+										<li>Delivery app for tiny hats for dogs</li>
+										<li>Educational app teaching hip hop artists culinary skills</li>
+										<li>Action adventure on a bus</li>
+										<li>2-D platformer fighting with food</li>
+										<li>Action adventure can only see where they have shot</li>
+										<li>VR school simulator</li>
+									</ul>
+									
+									<p id = "code">
+									<h2>Code</h2>
+									<p id = "Scanner.java">
+									<h4><i>Scanner.java</i></h4>
+									<p>Leared about java scanner and test code for using them</p>
+									<pre><code>import java.util.Scanner;
+
+class Main {
+  public static void main(String[] args) {
+    System.out.println("Hello world! Test codes from WCADY");
+
+    Scanner kb = new Scanner(System.in);
+
+    System.out.println("How many shoes do you have?");
+    int num_shoes = kb.nextInt();
+    System.out.println(num_shoes);
+
+    System.out.println("How many pants do you have?");
+    int num_pants = kb.nextInt();
+    System.out.println(num_pants);
+
+    System.out.println("How many shirts do you have?");
+    int num_shirts = kb.nextInt();
+    System.out.println(num_shirts);
+
+    System.out.println(num_shoes * num_pants * num_shirts);
+  }
+}
+									</code></pre>
+									<p id = "Pretest.java">
+									<h4><i>Pretest.java</i></h4>
+									<p><b>Pretest</b></p>
+									<pre><code>import java.util.Scanner;
+
+class Main {
+  public static void main(String[] args) {
+    System.out.println("pretest.txt");
+
+    Scanner kb = new Scanner(System.in);
+
+    System.out.println("Please enter 3 scores each for the 4 students. Please press ENTER after each scores");
+
+    System.out.println("=====[ Alice ]=====");
+    System.out.print("Quiz #1 : ");
+    int A_1 = kb.nextInt();
+    System.out.print("Quiz #2 : ");
+    int A_2 = kb.nextInt();
+    System.out.print("Final exam : ");
+    int A_3 = kb.nextInt();
+
+    System.out.println("=====[ Bob ]=====");
+    System.out.print("Quiz #1 : ");
+    int B_1 = kb.nextInt();
+    System.out.print("Quiz #2 : ");
+    int B_2 = kb.nextInt();
+    System.out.print("Final exam : ");
+    int B_3 = kb.nextInt();
+
+    System.out.println("=====[ Cindy ]=====");
+    System.out.print("Quiz #1 : ");
+    int C_1 = kb.nextInt();
+    System.out.print("Quiz #2 : ");
+    int C_2 = kb.nextInt();
+    System.out.print("Final exam : ");
+    int C_3 = kb.nextInt();
+
+    System.out.println("=====[ Dennis ]=====");
+    System.out.print("Quiz #1 : ");
+    int D_1 = kb.nextInt();
+    System.out.print("Quiz #2 : ");
+    int D_2 = kb.nextInt();
+    System.out.print("Final exam : ");
+    int D_3 = kb.nextInt();
+
+    double A_final = A_1*0.3 + A_2*0.3 + A_3*0.4;
+    double B_final = B_1*0.3 + B_2*0.3 + B_3*0.4;
+    double C_final = C_1*0.3 + C_2*0.3 + C_3*0.4;
+    double D_final = D_1*0.3 + D_2*0.3 + D_3*0.4;
+
+    double avg_final = (A_final + B_final + C_final + D_final) / 4;
+
+    double avg_boys = (B_final + D_final) / 2;
+    double avg_girls = (A_final + C_final) / 2;
+
+    System.out.println("==========< OUTPUT >==========");
+    System.out.println("The final number grade for each student : ");
+    System.out.println("  Alice : " + A_final);
+    System.out.println("  Bob : " + B_final);
+    System.out.println("  Cindy : " + C_final);
+    System.out.println("  Dennis : " + D_final);
+    System.out.println("====================");
+
+    System.out.println("The average final grade for the whole class : " + avg_final);
+    System.out.println("====================");
+
+    System.out.println("The average final grade for just the boys : " + avg_boys);
+    System.out.println("The average final grade for just the girls : " + avg_girls);
+    System.out.println("====================");
+
+    System.out.println("I just added some more codes to make input/output easier.");
+  }
+}
+</code></pre>
+									<a href="images/day1/pretest.png"><span class="image main"><img src="images/day1/pretest.png" alt="" /></span></a>
+
+									<p id = "Geometry_Homework.java">
+									<h4><i>Geometry_Homework.java</i></h4>
+									<p><b>Night 1</b> Geometry homework</p>
+									<pre><code>import java.util.Scanner;
+
+class Main {
+  public static void main(String[] args) {
+    System.out.println("===[ This program help you with your geometry homework ]===");
+    System.out.println("  Mode 0 : The perimeter of a triangle");
+    System.out.println("  Mode 1 : The circumference of a circle, from its radius");
+    System.out.println("  Mode 2 : The circumference of a circle, from its diameter");
+    System.out.println("  Mode 3 : The volume of a rectangular solid");
+    System.out.println("  Mode 4 : The volume of a cylinder, from its height and radius");
+    System.out.println("  Mode 5 : The volume of a sphere, from its radius");
+    System.out.println("  Mode 9 : Exit");
+
+    Scanner kb = new Scanner(System.in);
+
+    while (true) {
+      System.out.println("====================");
+      System.out.print("MODE : ");
+      int mode = kb.nextInt();
+
+      if (mode == 0){
+        System.out.println("Please enter 3 lengths of triangle --> Perimeter");
+        double A_1 = kb.nextDouble();
+        double A_2 = kb.nextDouble();
+        double A_3 = kb.nextDouble();
+        double A = A_1 + A_2 + A_3;
+        System.out.println("Perimeter = " + A);
+      } else if (mode == 1) {
+        System.out.println("Please enter the radius --> Circumference");
+        double B_1 = kb.nextDouble();
+        double B = 2 * 3.14 * B_1;
+        System.out.println("Circumference = " + B);
+      } else if (mode == 2) { 
+        System.out.println("Please enter the diameter --> Circumference");
+        double C_1 = kb.nextDouble();
+        double C = 3.14 * C_1;
+        System.out.println("Circumference = " + C);
+      } else if (mode == 3) {
+        System.out.println("Please enter 3 lengths of rectangular solid --> Volume");
+        double D_1 = kb.nextDouble();
+        double D_2 = kb.nextDouble();
+        double D_3 = kb.nextDouble();
+        double D = D_1 * D_2 * D_3;
+        System.out.println("Volume = " + D);
+      } else if (mode == 4) {
+        System.out.println("Please enter height and radius of cylinder --> Volume");
+        double E_1 = kb.nextDouble();
+        double E_2 = kb.nextDouble();
+        double E = E_1 * 3.14 * E_2 * E_2;
+        System.out.println("Volume = " + E);
+      } else if (mode == 5) {
+        System.out.println("Please enter the radius --> Volume");
+        double F_1 = kb.nextDouble();
+        double F = 4 * 3.14 * F_1 * F_1 * F_1 / 3;
+        System.out.println("Volume = " + F);
+      } else if (mode == 9) {
+        break;
+      }
+    }
+  }
+}
+									</code></pre>
+								</section>
+
+						</div>
+					</div>
+
+				<!-- Sidebar -->
+					<div id="sidebar">
+						<div class="inner">
+
+							<!-- Search -->
+								<section id="search" class="alt">
+									<form method="post" action="#">
+										<input type="text" name="query" id="query" placeholder="Search" />
+									</form>
+								</section>
+
+							<!-- Menu -->
+								<nav id="menu">
+									<header class="major">
+										<h2>Menu</h2>
+									</header>
+									<ul>
+										<li><a href="index.html">Homepage</a></li>
+										<li><a href="about_me.html">About me</a></li>
+										<li><a href="about_ksa.html">About KSA</a></li>
+										<li><a href="about_wcaty.html">About WCATY</a></li>
+										<li>
+											<span class="opener">Portfolio - Week 1</span>
+											<ul>
+												<li><a href="day0.html">Day 0</a></li>
+												<li><a href="day1.html">Day 1</a></li>
+												<li><a href="day2.html">Day 2</a></li>
+												<li><a href="day3.html">Day 3</a></li>
+												<li><a href="day4.html">Day 4</a></li>
+												<li><a href="day5.html">Day 5</a></li>
+											</ul>
+										</li>
+										<li>
+											<span class="opener">Portfolio - Week 2</span>
+											<ul>
+												<li><a href="day6.html">Day 6</a></li>
+												<li><a href="day7.html">Day 7</a></li>
+												<li><a href="day8.html">Day 8</a></li>
+												<li><a href="day9.html">Day 9</a></li>
+												<li><a href="day10.html">Day 10</a></li>
+												<li><a href="day11.html">Day 11</a></li>
+											</ul>
+										</li>
+										<li>
+											<span class="opener">Portfolio - Week 3</span>
+											<ul>
+												<li><a href="day12.html">Day 12</a></li>
+												<li><a href="day13.html">Day 13</a></li>
+												<li><a href="day14.html">Day 14</a></li>
+												<li><a href="day15.html">Day 15</a></li>
+												<li><a href="day16.html">Day 16</a></li>
+												<li><a href="day17.html">Day 17</a></li>
+											</ul>
+										</li>
+										<li>
+											<span class="opener">Projects</span>
+											<ul>
+												<li><a href="pikachu.html">Project Pikachu</a></li>
+												<li><a href="portfolio.html">Project Portfolio</a></li>
+												<li><a href="final.html">Final group project</a></li>
+											</ul>
+										</li>
+									</ul>
+								</nav>
+
+							<!-- Section -->
+							
+								<section>
+									<header class="major">
+										<h2>Important News</h2>
+									</header>
+									<div class="mini-posts">
+										<article>
+											<a href="#" class="image"><img src="images/pic07.jpg" alt="" /></a>
+											<p>July 20th, finally the WCATY camp ends.</p>
+										</article>
+										
+									</div>
+									<ul class="actions">
+										<li><a href="about_wcaty.html" class="button">More</a></li>
+									</ul>
+								</section>
+							
+
+							<!-- Section -->
+								<section>
+									<header class="major">
+										<h2>Get in touch</h2>
+									</header>
+									<p>You can contact me through the contact information below.</p>
+									<ul class="contact">
+										<li class="icon solid fa-envelope"><a href="#">ksa18ky@gmail.com</a></li>
+										<li class="icon solid fa-phone">(+82)10-9984-1915</li>
+										<li class="icon solid fa-home">31, Myeongdal-ro 6-gil, Seocho-gu<br />
+										Seoul, Republic of Korea</li>
+									</ul>
+								</section>
+								
+								<section>
+								<header class="major">
+									<h2>Shortcuts</h2>
+								</header>
+								<p>
+									<a href = "#top">Top</a><br><br>
+									<a href = "#code">Code</a><br>
+									- <a href = "#Scanner.java">Scanner.java</a><br>
+									- <a href = "#Pretest.java">Pretest.java</a><br>
+									- <a href = "#Geometry_Homework.java">Geometry_Homework.java</a>
+								</p>
+								</section>
+
+								<footer id="footer">
+									<p class="copyright">&copy; Young Ko. All rights reserved. <br />
+									Demo Images: <a href="https://unsplash.com">Unsplash</a>. Design: <a href="https://html5up.net">HTML5 UP</a>.</p>
+								</footer>
+
+						</div>
+					</div>
+
+			</div>
+
+		<!-- Scripts -->
+			<script src="assets/js/jquery.min.js"></script>
+			<script src="assets/js/browser.min.js"></script>
+			<script src="assets/js/breakpoints.min.js"></script>
+			<script src="assets/js/util.js"></script>
+			<script src="assets/js/main.js"></script>
+
+	</body>
+</html>

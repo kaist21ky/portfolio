@@ -1,0 +1,413 @@
+<!DOCTYPE HTML>
+<!--
+	Editorial by HTML5 UP
+	html5up.net | @ajlkn
+	Free for personal and commercial use under the CCA 3.0 license (html5up.net/license)
+-->
+<html>
+	<head>
+		<title>Day 2</title>
+		<meta charset="utf-8" />
+		<meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no" />
+		<link rel="stylesheet" href="assets/css/main.css" />
+	</head>
+	<body class="is-preload">
+
+		<!-- Wrapper -->
+			<div id="wrapper">
+			<p id = "top">
+
+				<!-- Main -->
+					<div id="main">
+						<div class="inner">
+
+							<!-- Header -->
+								<header id="header">
+									<a href="index.html" class="logo"><strong>Young Ko</strong> at WCATY</a>
+									<ul class="icons">
+										<li><a href="#" class="icon brands fa-twitter"><span class="label">Twitter</span></a></li>
+										<li><a href="#" class="icon brands fa-facebook-f"><span class="label">Facebook</span></a></li>
+										<li><a href="#" class="icon brands fa-snapchat-ghost"><span class="label">Snapchat</span></a></li>
+										<li><a href="#" class="icon brands fa-instagram"><span class="label">Instagram</span></a></li>
+										<li><a href="#" class="icon brands fa-medium-m"><span class="label">Medium</span></a></li>
+									</ul>
+								</header>
+
+							<!-- Content -->
+								<section>
+									<header class="main">
+										<h1>Day 2</h1>
+									</header>
+
+									<p> Tuesday, July 2, 2019 </p>
+
+									<h3>Schedule</h3>
+										<div class="row">
+											<div class="col-6 col-12-small">
+
+												<h4>Questions</h4>
+												<ol>
+													<li>What is data?</li>
+													<li>What is time?</li>
+												</ol>
+
+											</div>
+											<div class="col-6 col-12-small">
+
+												<h4>Concepts</h4>
+												<ul>
+													<li>Variables</li>
+													<li>Data types, Primitives, and Generic objects</li>
+													<li>Type conversion with possible errors</li>
+													<li>Big-O, Hidden costs due to other's code</li>
+												</ul>
+
+											</div>
+										</div>
+
+									<span class="image main"><img src="images/day2/turing_machine.jpg" alt="" /></span>
+
+									<!-- Content -->
+
+									<h2>String Operation : Upper / Lower / Strip / Replace / Split</h2>
+									<h4>Upper, Lower</h4>
+									<p><span class="image left"><img src="images/day2/ascii_table.gif" alt=""/></span>When we look at ASCII table, we can know that the difference between lowercase and uppercase is <b>32</b><br>
+									65 A ~ 90 Z<br>
+									97 a ~ 122 z<br>
+									&#8594 We can change the uppercase and lowercase by +32, -32 the ASCII code.<br>
+									For calculation, we can either <b>Make a new copy</b> or just <b>Replace</b> it.<br>
+									Replacing uses less bytes so it can be faster, but it is dangerous because we lose the original data.<br>
+									(ex) "I'm lovin' it." = <br>
+									<code>[73, 39, 109, 32, 108, 111, 118, 105, 110, 39, 32, 105, 116, 46]</code><br>
+									<br><br><br><br><br></p>
+
+									<h4>Strip</h4>
+									<p>Striping is returning a copy of the string with both leading and trailing characters stripped.<br>
+									For example, we can strip blank spaces from " Bob Grant" &#8594 "Bob Grant"<br>
+									(SPACE = 32, TAB = 9, \n = 10, \c = 13)</p>
+
+									<h4>Replace</h4>
+									<p>For upper and lower, we could replace and edit the data because the total length of string doesn't change.<br>
+									BUT, length of string <b>changes</b> when we replace.<br>
+									(ex) "a message" : n=9 &#8594 "batman" : n=6 <code>-3</code><br>
+									Everytime we replace "a message" to "batman", the length of string gets shorter. <code>(-3)*N</code><br>
+									With this way, we can calculate the final string's length. <code>len(Original)-3N</code>
+									<ol>
+										<li>Calculate the length of final string</li>
+										<li>Copy the string with words replaced</li>
+										<li>Delete the old data</li>
+									</ol>
+									</p>
+
+									<h4>Split</h4>
+									<p>Spliting string is very useful when we get datas from files.<br>
+									(ex)We want to make <code>"Kyne, John, Grant, Alice"</code> &#8594 <code>["Kyne", "John", "Grant", "Alice"]</code><br>
+									We know that we can split <code>"Kyne, John, Grant, Alice"</code> with <b>", "</b> to make <code>["Kyne", "John", "Grant", "Alice"]</code><br>
+									We splited 3 time so we have 4 strings as a result.</p>
+
+									<p>What can be the worst case?
+									<ul>
+										<li>", , , ..., , " &#8594 Spliting N times (N space)</li>
+										<li>"Onebigstringwithnospliting" &#8594 No spliting (N+1 space)</li>
+									</ul>
+									</p>
+
+									<p>What about the big strings like a whole book? (ex) colour &#8594 color<br>
+									Find <b>Exact string matching</b> at <a href="https://xlinux.nist.gov/dads/">NIST DADS</a>.<br>
+									First, we have to match every strings to calculate the final length and then replace.<br>
+									<a href="https://xlinux.nist.gov/dads/HTML/bruteForceStringSearch.html">Brute force</a> : O(mn)<br>
+									<a href="https://xlinux.nist.gov/dads/HTML/knuthMorrisPratt.html">Knuth-Morris-Pratt</a> : O(m+n)
+									</p>
+
+									<h2>Turing Machine</h2>
+									
+
+									<p id = "code">
+									<h2>Code</h2>
+									<p id = "Test.java">
+									<h4><i>Test.java</i></h4>
+									<p>Learned about nextInt(), nextDouble()...</p>
+									<pre><code>import java.util.*;
+
+class Test {
+  public static void main(String[] args) {
+
+    Scanner kb = new Scanner(System.in);
+
+    //Keyboard input and printf
+    System.out.println("What is your name?");
+    String name = kb.nextLine();
+    System.out.println("How old are you?");
+    int age = kb.nextInt();
+    System.out.println("How tall are you?");
+    double height = kb.nextDouble();
+
+    System.out.printf("Your name is %s, you are %d years old, and you are %.2f meters tall.", name, age, height);
+
+    //String split
+    System.out.println("Enter numbers with ', '");
+    String line = kb.nextLine();
+    String[] parts = line.split(", ");
+    int array_length = parts.length;
+
+    for (int x = 0; x < array_length - 1 ; x++){
+      System.out.print(parts[x] + " | ");
+    }
+    System.out.println(parts[array_length - 1]);
+
+  }
+}
+									<u></u></code></pre>
+									<div class="box alt">
+										<div class="row gtr-50 gtr-uniform">
+											<div class="col-4"><span class="image fit"><a href="images/day2/test1.png"><img src="images/day2/test1.png" alt="" /></a></span></div>
+											<div class="col-4"><span class="image fit"><a href="images/day2/test2.png"><img src="images/day2/test2.png" alt="" /></a></span></div>
+										</div>
+									</div>
+									
+									<p id = "Replacement.java">
+									<h4><i>Replacement.java</i></h4>
+									<p><b>Night 2</b> Replacement puzzle</p>
+									<pre><code>class Main {
+  public static void main(String[] args) {
+    //the given string is 00000000
+    String string="00000000";
+
+    //convert_n converts string
+    string=convert_1(string);
+    string=convert_4(string);
+    string=convert_2(string);
+    string=convert_2(string);
+
+    //prints out final string
+    System.out.println(string);
+
+  }
+  public static String convert_1(String array){
+    String arr = array.replaceAll("00","01");
+    return arr;
+  }
+  public static String convert_2(String array){
+    String arr = array.replaceAll("11","01");
+    return arr;
+  }
+  public static String convert_3(String array){
+    String arr = array.replaceAll("010","111");
+    return arr;
+  }
+  public static String convert_4(String array){
+    String arr = array.replaceAll("101","111");
+    return arr;
+  }
+}
+									</code></pre>
+
+									<pre><code>class Main {
+  public static void main(String[] args) {
+    //initial letters is ABCDE
+    String letters = "ABCDE";
+
+    //convert(20 times)
+    letters = letters.replaceAll("DE","ED");
+    letters = letters.replaceAll("CE","DD");
+    letters = letters.replaceAll("BD","CC");
+    letters = letters.replaceAll("AC","BB");
+    letters = letters.replaceAll("DD","EC");
+    letters = letters.replaceAll("CE","DD");
+    letters = letters.replaceAll("DD","EC");
+    letters = letters.replaceAll("BE","CD");
+    letters = letters.replaceAll("CC","DB");
+    letters = letters.replaceAll("DB","EA");
+    letters = letters.replaceAll("DE","ED");
+    letters = letters.replaceAll("CE","DD");
+    letters = letters.replaceAll("BD","CC");
+    letters = letters.replaceAll("DD","EC");
+    letters = letters.replaceAll("CE","DD");
+    letters = letters.replaceAll("DD","EC");
+    letters = letters.replaceAll("CC","DB");
+    letters = letters.replaceAll("CE","DD");
+    letters = letters.replaceAll("DD","EC");
+    letters = letters.replaceAll("CD","DC");
+
+    //final letters is EDCBA
+    System.out.println(letters);
+  }
+}
+									</code></pre>
+									<div class="box alt">
+										<div class="row gtr-50 gtr-uniform">
+											<div class="col-4"><span class="image fit"><a href="images/day2/1.png"><img src="images/day2/1.png" alt="" /></a></span></div>
+											<div class="col-4"><span class="image fit"><a href="images/day2/2.png"><img src="images/day2/2.png" alt="" /></a></span></div>
+										</div>
+									</div>
+									<p>I also made a code without using replaceAll() to do the same thing with Part 2 by using ASCII code</p>
+									<pre><code>class Main {
+  public static void main(String[] args) {
+    String init = "ABCDE";
+    System.out.println(start);
+
+    //Initialize array
+    int[] A = new int[]{0,0,0,0,0};
+
+    //Input (ABCDE) to ASCII code
+    for(int i = 0; i < init.length();i++){
+      char ch = init.charAt(i);
+      int ascii = (int)ch;
+      A[i] = ascii; 
+    } 
+    
+    //Replacing in same rules (Repeat)
+    for(int j = 0; j < 4; j++){
+      for (int k = 0; k < 4; k++){
+        A[k] = A[k] + 1; //First letter goes up
+        A[k+1] = A[k+1] - 1; //Second letter goes down
+      }
+    }
+    for(int k = 0; k < 2; k++){
+      for(int j = 1; j < 3; j++){
+        A[j] = A[j] + 1;
+        A[j+1] = A[j+1] - 1;
+      }
+    }
+    //Printing the result
+    for(int i = 0; i < init.length(); i++){
+        System.out.print((char)A[i]);
+    }
+  }
+}
+									</code></pre>
+
+								</section>
+
+						</div>
+					</div>
+
+				<!-- Sidebar -->
+					<div id="sidebar">
+						<div class="inner">
+
+							<!-- Search -->
+								<section id="search" class="alt">
+									<form method="post" action="#">
+										<input type="text" name="query" id="query" placeholder="Search" />
+									</form>
+								</section>
+
+							<!-- Menu -->
+								<nav id="menu">
+									<header class="major">
+										<h2>Menu</h2>
+									</header>
+									<ul>
+										<li><a href="index.html">Homepage</a></li>
+										<li><a href="about_me.html">About me</a></li>
+										<li><a href="about_ksa.html">About KSA</a></li>
+										<li><a href="about_wcaty.html">About WCATY</a></li>
+										<li>
+											<span class="opener">Portfolio - Week 1</span>
+											<ul>
+												<li><a href="day0.html">Day 0</a></li>
+												<li><a href="day1.html">Day 1</a></li>
+												<li><a href="day2.html">Day 2</a></li>
+												<li><a href="day3.html">Day 3</a></li>
+												<li><a href="day4.html">Day 4</a></li>
+												<li><a href="day5.html">Day 5</a></li>
+											</ul>
+										</li>
+										<li>
+											<span class="opener">Portfolio - Week 2</span>
+											<ul>
+												<li><a href="day6.html">Day 6</a></li>
+												<li><a href="day7.html">Day 7</a></li>
+												<li><a href="day8.html">Day 8</a></li>
+												<li><a href="day9.html">Day 9</a></li>
+												<li><a href="day10.html">Day 10</a></li>
+												<li><a href="day11.html">Day 11</a></li>
+											</ul>
+										</li>
+										<li>
+											<span class="opener">Portfolio - Week 3</span>
+											<ul>
+												<li><a href="day12.html">Day 12</a></li>
+												<li><a href="day13.html">Day 13</a></li>
+												<li><a href="day14.html">Day 14</a></li>
+												<li><a href="day15.html">Day 15</a></li>
+												<li><a href="day16.html">Day 16</a></li>
+												<li><a href="day17.html">Day 17</a></li>
+											</ul>
+										</li>
+										<li>
+											<span class="opener">Projects</span>
+											<ul>
+												<li><a href="pikachu.html">Project Pikachu</a></li>
+												<li><a href="portfolio.html">Project Portfolio</a></li>
+												<li><a href="final.html">Final group project</a></li>
+											</ul>
+										</li>
+									</ul>
+								</nav>
+
+							<!-- Section -->
+							
+								<section>
+									<header class="major">
+										<h2>Important News</h2>
+									</header>
+									<div class="mini-posts">
+										<article>
+											<a href="#" class="image"><img src="images/pic07.jpg" alt="" /></a>
+											<p>July 20th, finally the WCATY camp ends.</p>
+										</article>
+										
+									</div>
+									<ul class="actions">
+										<li><a href="about_wcaty.html" class="button">More</a></li>
+									</ul>
+								</section>
+							
+
+							<!-- Section -->
+								<section>
+									<header class="major">
+										<h2>Get in touch</h2>
+									</header>
+									<p>You can contact me through the contact information below.</p>
+									<ul class="contact">
+										<li class="icon solid fa-envelope"><a href="#">ksa18ky@gmail.com</a></li>
+										<li class="icon solid fa-phone">(+82)10-9984-1915</li>
+										<li class="icon solid fa-home">31, Myeongdal-ro 6-gil, Seocho-gu<br />
+										Seoul, Republic of Korea</li>
+									</ul>
+								</section>
+								
+								<section>
+								<header class="major">
+									<h2>Shortcuts</h2>
+								</header>
+								<p>
+									<a href = "#top">Top</a><br><br>
+									<a href = "#code">Code</a><br>
+									- <a href = "#Test.java">Test.java</a><br>
+									- <a href = "#Replacement.java">Replacement.java</a>
+								</p>
+								</section>
+
+								<footer id="footer">
+									<p class="copyright">&copy; Young Ko. All rights reserved. <br />
+									Demo Images: <a href="https://unsplash.com">Unsplash</a>. Design: <a href="https://html5up.net">HTML5 UP</a>.</p>
+								</footer>
+
+						</div>
+					</div>
+
+			</div>
+
+		<!-- Scripts -->
+			<script src="assets/js/jquery.min.js"></script>
+			<script src="assets/js/browser.min.js"></script>
+			<script src="assets/js/breakpoints.min.js"></script>
+			<script src="assets/js/util.js"></script>
+			<script src="assets/js/main.js"></script>
+
+	</body>
+</html>

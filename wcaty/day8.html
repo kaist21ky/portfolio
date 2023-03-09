@@ -1,0 +1,560 @@
+<!DOCTYPE HTML>
+<!--
+	Editorial by HTML5 UP
+	html5up.net | @ajlkn
+	Free for personal and commercial use under the CCA 3.0 license (html5up.net/license)
+-->
+<html>
+	<head>
+		<title>Day 8</title>
+		<meta charset="utf-8" />
+		<meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no" />
+		<link rel="stylesheet" href="assets/css/main.css" />
+	</head>
+	<body class="is-preload">
+
+		<!-- Wrapper -->
+			<div id="wrapper">
+			<p id = "top">
+
+				<!-- Main -->
+					<div id="main">
+						<div class="inner">
+
+							<!-- Header -->
+								<header id="header">
+									<a href="index.html" class="logo"><strong>Young Ko</strong> at WCATY</a>
+									<ul class="icons">
+										<li><a href="#" class="icon brands fa-twitter"><span class="label">Twitter</span></a></li>
+										<li><a href="#" class="icon brands fa-facebook-f"><span class="label">Facebook</span></a></li>
+										<li><a href="#" class="icon brands fa-snapchat-ghost"><span class="label">Snapchat</span></a></li>
+										<li><a href="#" class="icon brands fa-instagram"><span class="label">Instagram</span></a></li>
+										<li><a href="#" class="icon brands fa-medium-m"><span class="label">Medium</span></a></li>
+									</ul>
+								</header>
+
+							<!-- Content -->
+								<section>
+									<header class="main">
+										<h1>Day 8</h1>
+									</header>
+
+									<p> Tuesday, July 9, 2019 </p>
+
+									<h3>Schedule</h3>
+										<div class="row">
+											<div class="col-6 col-12-small">
+
+												<h4>Questions</h4>
+												<ol>
+													<li>What was the step that most limited us yesterday?</li>
+													<li>What ADS's get us past that limitation?</li>
+												</ol>
+
+											</div>
+											<div class="col-6 col-12-small">
+
+												<h4>Concepts</h4>
+												<ul>
+													<li>Objects, JSON</li>
+													<li>Linked lists</li>
+													<li>Trees</li>
+													<li>LL search, Traverse, Append, Insert, Remove, Concatenate</li>
+													<li>Trees VS Linked List</li>
+												</ul>
+
+											</div>
+										</div>
+
+									<span class="image main"><img src="images/pic11.jpg" alt="" /></span>
+
+									<!-- Content -->
+									<h2>Title</h2>
+									<p>Content</p>
+
+									<p id = "Code">
+									<h2>Code</h2>
+									<p id = "20Q.py">
+									<h4><i>20Q.py</i></h4>
+									<p>Learned about </p>
+									<pre><code># Shim
+import json
+class js(object):
+  def __init__(self, *args, **kwargs):
+    for arg in args:
+      self.__dict__.update(arg)
+    self.__dict__.update(kwargs)
+  def __getitem__(self, name):
+    return self.__dict__.get(name, None)
+  def __setitem__(self, name, val):
+    return self.__dict__.__setitem__(name, val)
+  def __delitem__(self, name):
+    if self.__dict__.has_key(name):
+      del self.__dict__[name]
+  def __getattr__(self, name):
+    return self.__getitem__(name)
+  def __setattr__(self, name, val):
+    return self.__setitem__(name, val)
+  def __delattr__(self, name):
+    return self.__delitem__(name)
+  def __getstate__(self):
+    return self.__dict__
+  def __setstate__(self, d):
+    self.__dict__.update(d)
+  def __iter__(self):
+    return self.__dict__.__iter__()
+  def __repr__(self):
+    return self.__dict__.__repr__()
+  def __str__(self):
+    return self.__dict__.__str__()
+  @staticmethod
+  def ify(thing):
+    return json.loads(json.dumps(thing), object_hook=lambda d: js(d))
+
+# Load the data
+data = js.ify(json.load(open("20q.json", "r")))
+#print(data)
+
+temp = data
+for i in range(3):
+    answer = input(temp.question)
+    if answer == "yes":
+        temp = temp.yes
+    elif answer == "no":
+        temp = temp.no
+print (temp.answer)
+									</code></pre>
+									<div class="box alt">
+										<div class="row gtr-50 gtr-uniform">
+											<div class="col-4"><span class="image fit"><a href="images/day8/20q.png"><img src="images/day8/20q.png" alt="" /></a></span></div>
+										</div>
+									</div>
+									<p id = "Dinner_Data.py">
+									<h4><i>Dinner_Data.py</i></h4>
+									<p>Learned about </p>
+									<pre><code># Start of shim
+import json
+class js(object):
+  def __init__(self, *args, **kwargs):
+    for arg in args:
+      self.__dict__.update(arg)
+    self.__dict__.update(kwargs)
+  def __getitem__(self, name):
+    return self.__dict__.get(name, None)
+  def __setitem__(self, name, val):
+    return self.__dict__.__setitem__(name, val)
+  def __delitem__(self, name):
+    if self.__dict__.has_key(name):
+      del self.__dict__[name]
+  def __getattr__(self, name):
+    return self.__getitem__(name)
+  def __setattr__(self, name, val):
+    return self.__setitem__(name, val)
+  def __delattr__(self, name):
+    return self.__delitem__(name)
+  def __getstate__(self):
+    return self.__dict__
+  def __setstate__(self, d):
+    self.__dict__.update(d)
+  def __iter__(self):
+    return self.__dict__.__iter__()
+  def __repr__(self):
+    return self.__dict__.__repr__()
+  def __str__(self):
+    return self.__dict__.__str__()
+  @staticmethod
+  def ify(thing):
+    return json.loads(json.dumps(thing), object_hook=lambda d: js(d))
+# End of shim
+
+# Initial receipt data
+receipt = js.ify({
+    "num_guests": 0,
+    "seat_num": 0,
+    "drinks": [],
+    "foods": []
+})
+
+# Greets user, asks how many are in the party, seats at a random table
+import random
+def greet_and_seat():
+    global receipt
+    
+    print("Welcome to Cal's")
+    num_guests = int(input("How many're eatin' 'night? "))
+    seat_num = random.randint(0, 25)
+    receipt.num_guests = num_guests
+    receipt.seat_num = seat_num
+    
+    
+
+# Asks each guest in the party what they want to drink
+def order_drinks():
+    global receipt
+    print("Watcha drinkin'?")
+    for i in range(receipt.num_guests):
+        drink = input("Guest #{}: ".format(i+1))
+        receipt.drinks.append(drink)
+
+# Asks each guest in the party what they want to eat
+# A food has a base item name and a customization message
+def order_food():
+    global receipt
+    print("Watcha havin'?")
+    for i in range(receipt.num_guests):
+        # Initial food data
+        food = js.ify({
+            "item": "",
+            "custom": ""
+        })
+
+        item = input("Guest #{} Item: ".format(i+1))
+        custom = input("Guest #{} Custom: ".format(i+1))
+        food.item = item
+        food.custom = custom
+        receipt.foods.append(food)
+
+# Checks in on the user and asks them for new drinks and foods
+def yallright():
+    print("Y'all havin' a good time?")
+    order_drinks()
+    order_food()
+    
+def pay():
+    global receipt
+    total_pay = 0
+    print ("")
+    print ("===== Drinks =====")
+    for i in range(receipt.num_guests * 4):
+        if receipt.drinks[i] != "":
+            total_pay = total_pay + 2
+            print ("{}\t $2".format(receipt.drinks[i]))
+    print ("===== Foods =====")
+    for i in range(receipt.num_guests * 4):
+        food_cost = random.randint(10, 50)
+        if receipt.foods[i].item != "":
+            total_pay = total_pay + food_cost
+            print ("{}\t ${}".format(receipt.foods[i].item, food_cost))
+            print ("{}\t".format(receipt.foods[i].custom))
+            print ("")
+    print ("==========")
+    print ("TOTAL : ${}".format(total_pay))
+    print ("==========")
+
+def food_poisoning():
+    global receipt
+    poison_guest = random.randint(1, receipt.num_guests)
+    print ("We are so sorry. It seems that Guest #{} has gotten sick from something they ate.
+	Let us make it up to you by removing their items from the bill.".format(poison_guest))
+    for i in range(receipt.num_guests,0,-1):
+        receipt.drinks.pop(3*(i-1) + poison_guest - 1)
+        receipt.foods.pop(3*(i-1) + poison_guest - 1)
+    receipt.num_guests -= 1
+
+# The "main" starts here
+greet_and_seat()
+order_drinks()
+order_food()
+yallright()
+yallright()
+yallright()
+print(receipt)
+
+pay()
+food_poisoning()
+pay()
+print(receipt)
+									</code></pre>
+									<div class="box alt">
+										<div class="row gtr-50 gtr-uniform">
+											<div class="col-4"><span class="image fit"><a href="images/day8/dinner.png"><img src="images/day8/dinner.png" alt="" /></a></span></div>
+										</div>
+									</div>
+									<p id = "Projector.py">
+									<h4><i>Projector.py</i></h4>
+									<p>Learned about </p>
+									<pre><code>import random
+# Start of shim
+import json
+class js(object):
+  def __init__(self, *args, **kwargs):
+    for arg in args:
+      self.__dict__.update(arg)
+    self.__dict__.update(kwargs)
+  def __getitem__(self, name):
+    return self.__dict__.get(name, None)
+  def __setitem__(self, name, val):
+    return self.__dict__.__setitem__(name, val)
+  def __delitem__(self, name):
+    if self.__dict__.has_key(name):
+      del self.__dict__[name]
+  def __getattr__(self, name):
+    return self.__getitem__(name)
+  def __setattr__(self, name, val):
+    return self.__setitem__(name, val)
+  def __delattr__(self, name):
+    return self.__delitem__(name)
+  def __getstate__(self):
+    return self.__dict__
+  def __setstate__(self, d):
+    self.__dict__.update(d)
+  def __iter__(self):
+    return self.__dict__.__iter__()
+  def __repr__(self):
+    return self.__dict__.__repr__()
+  def __str__(self):
+    return self.__dict__.__str__()
+  @staticmethod
+  def ify(thing):
+    return json.loads(json.dumps(thing), object_hook=lambda d: js(d))
+# End of shim
+
+# Initial receipt data
+database = js.ify({
+    "store": {
+                "name" : "Cal's",
+                "address" : "Calslab 204",
+                "number" : "555-123-1234"
+             },
+    "projectors": []
+})
+
+owner_money = 0;
+    
+def info_input():
+    global database
+    global owner_money
+    print ("=============== Selling Process ===============")
+    model_name = input("What is your projector's model name?\t")
+    #model_barcode = input("What is the barcode number? ")
+    model_company = input("What company made it?\t")
+    #model_price = input("How much is it? ")
+    
+    specification_wifi = input("Can we use wi-fi? (True/False)\t")
+    #specification_bt = input("Can we use Bluetooth? (True/False) ")
+    #specification_usb = input("Can we use USB? (True/False) ")
+    specification_resolution = input("What is the resolution?\t")
+    #specification_brightness = input("How bright is it? ")
+    
+    projector = js.ify({
+                "name" : "",
+                #"barcode" : "",
+                "company" : "",
+                "specification" : ["", ""],
+                "price" : ""
+             })
+
+    projector.name = model_name
+    #projector.barcode = model_barcode
+    projector.company = model_company
+    #projector.price = model_price
+    
+    projector.specification[0] = specification_wifi
+    #projector.specification[1] = specification_bt
+    #projector.specification[2] = specification_usb
+    projector.specification[1] = specification_resolution
+    #projector.specification[4] = specification_brightness
+    
+    rand_price = random.randint(10,1000)
+    projector.price = rand_price
+    
+    database.projectors.append(projector)
+    print("==========")
+    print("Data uploaded!")
+    print("Your projector is sold. (${})".format(rand_price))
+    owner_money = owner_money - rand_price
+    print("")
+    
+def info_output():
+    global database
+    if len(database.projectors) == 0:
+        print ("Sorry, we don't have projectors now.")
+        print ("")
+    else:
+        print ("Do you want some projectors?\t")
+        print ("============================== Projectors ==============================")
+        print ("[Name]\t\t[Company]\t[Price]\t\t[Resolution]")
+        for i in range(len(database.projectors)):
+            print ("{}\t\t{}\t\t${}\t\t{}".format(database.projectors[i].name, database.projectors[i].company,
+			database.projectors[i].price, database.projectors[i].specification[1]))
+        print ("========================================================================")
+        print ("")
+        buy_or_not = bool(input("Do you want to buy projector? (True/False)\t"))
+        if buy_or_not:
+            buy()
+        
+
+def buy():
+    global database
+    global owner_money
+    print ("=============== Buying Process ===============")
+    buy_name = input("What model do you want? Type the name of it.\t")
+    for i in range(len(database.projectors)):
+        if database.projectors[i].name == buy_name:
+            rand_price = random.randint(10,1000)
+            print ("Thank you! It will be ${} including tax.".format(database.projectors[i].price + rand_price))
+            owner_money = owner_money + database.projectors[i].price + rand_price
+            database.projectors.pop(i)
+            print("")
+
+while(True):
+    action = input("Hello. Why did you come? (Sell | Buy | Owner)\t")
+    if action == "Sell":
+        info_input()
+    elif action == "Buy":
+        info_output()
+    elif action == "Owner":
+        print("Owner, you have ${}.".format(owner_money))    
+									</code></pre>
+									<div class="box alt">
+										<div class="row gtr-50 gtr-uniform">
+											<div class="col-4"><span class="image fit"><a href="images/day8/projector.png"><img src="images/day8/projector.png" alt="" /></a></span></div>
+										</div>
+									</div>
+
+
+
+
+
+
+
+
+
+
+
+
+								</section>
+
+						</div>
+					</div>
+
+				<!-- Sidebar -->
+					<div id="sidebar">
+						<div class="inner">
+
+							<!-- Search -->
+								<section id="search" class="alt">
+									<form method="post" action="#">
+										<input type="text" name="query" id="query" placeholder="Search" />
+									</form>
+								</section>
+
+							<!-- Menu -->
+								<nav id="menu">
+									<header class="major">
+										<h2>Menu</h2>
+									</header>
+									<ul>
+										<li><a href="index.html">Homepage</a></li>
+										<li><a href="about_me.html">About me</a></li>
+										<li><a href="about_ksa.html">About KSA</a></li>
+										<li><a href="about_wcaty.html">About WCATY</a></li>
+										<li>
+											<span class="opener">Portfolio - Week 1</span>
+											<ul>
+												<li><a href="day0.html">Day 0</a></li>
+												<li><a href="day1.html">Day 1</a></li>
+												<li><a href="day2.html">Day 2</a></li>
+												<li><a href="day3.html">Day 3</a></li>
+												<li><a href="day4.html">Day 4</a></li>
+												<li><a href="day5.html">Day 5</a></li>
+											</ul>
+										</li>
+										<li>
+											<span class="opener">Portfolio - Week 2</span>
+											<ul>
+												<li><a href="day6.html">Day 6</a></li>
+												<li><a href="day7.html">Day 7</a></li>
+												<li><a href="day8.html">Day 8</a></li>
+												<li><a href="day9.html">Day 9</a></li>
+												<li><a href="day10.html">Day 10</a></li>
+												<li><a href="day11.html">Day 11</a></li>
+											</ul>
+										</li>
+										<li>
+											<span class="opener">Portfolio - Week 3</span>
+											<ul>
+												<li><a href="day12.html">Day 12</a></li>
+												<li><a href="day13.html">Day 13</a></li>
+												<li><a href="day14.html">Day 14</a></li>
+												<li><a href="day15.html">Day 15</a></li>
+												<li><a href="day16.html">Day 16</a></li>
+												<li><a href="day17.html">Day 17</a></li>
+											</ul>
+										</li>
+										<li>
+											<span class="opener">Projects</span>
+											<ul>
+												<li><a href="pikachu.html">Project Pikachu</a></li>
+												<li><a href="portfolio.html">Project Portfolio</a></li>
+												<li><a href="final.html">Final group project</a></li>
+											</ul>
+										</li>
+									</ul>
+								</nav>
+
+							<!-- Section -->
+							
+								<section>
+									<header class="major">
+										<h2>Important News</h2>
+									</header>
+									<div class="mini-posts">
+										<article>
+											<a href="#" class="image"><img src="images/pic07.jpg" alt="" /></a>
+											<p>July 20th, finally the WCATY camp ends.</p>
+										</article>
+										
+									</div>
+									<ul class="actions">
+										<li><a href="about_wcaty.html" class="button">More</a></li>
+									</ul>
+								</section>
+							
+
+							<!-- Section -->
+								<section>
+									<header class="major">
+										<h2>Get in touch</h2>
+									</header>
+									<p>You can contact me through the contact information below.</p>
+									<ul class="contact">
+										<li class="icon solid fa-envelope"><a href="#">ksa18ky@gmail.com</a></li>
+										<li class="icon solid fa-phone">(+82)10-9984-1915</li>
+										<li class="icon solid fa-home">31, Myeongdal-ro 6-gil, Seocho-gu<br />
+										Seoul, Republic of Korea</li>
+									</ul>
+								</section>
+								
+								<section>
+								<header class="major">
+									<h2>Shortcuts</h2>
+								</header>
+								<p>
+									<a href = "#top">Top</a><br><br>
+									<a href = "#code">Code</a><br>
+									- <a href = "#20Q.py">20Q.py</a><br>
+									- <a href = "#Dinner_Data.py">Dinner_Data.py</a><br>
+									- <a href = "#Projector.py">Projector.py</a>
+								</p>
+								</section>
+
+								<footer id="footer">
+									<p class="copyright">&copy; Young Ko. All rights reserved. <br />
+									Demo Images: <a href="https://unsplash.com">Unsplash</a>. Design: <a href="https://html5up.net">HTML5 UP</a>.</p>
+								</footer>
+
+						</div>
+					</div>
+
+			</div>
+
+		<!-- Scripts -->
+			<script src="assets/js/jquery.min.js"></script>
+			<script src="assets/js/browser.min.js"></script>
+			<script src="assets/js/breakpoints.min.js"></script>
+			<script src="assets/js/util.js"></script>
+			<script src="assets/js/main.js"></script>
+
+	</body>
+</html>

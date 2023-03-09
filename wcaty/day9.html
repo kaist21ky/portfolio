@@ -1,0 +1,506 @@
+<!DOCTYPE HTML>
+<!--
+	Editorial by HTML5 UP
+	html5up.net | @ajlkn
+	Free for personal and commercial use under the CCA 3.0 license (html5up.net/license)
+-->
+<html>
+	<head>
+		<title>Day 9</title>
+		<meta charset="utf-8" />
+		<meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no" />
+		<link rel="stylesheet" href="assets/css/main.css" />
+	</head>
+	<body class="is-preload">
+
+		<!-- Wrapper -->
+			<div id="wrapper">
+			<p id = "top">
+
+				<!-- Main -->
+					<div id="main">
+						<div class="inner">
+
+							<!-- Header -->
+								<header id="header">
+									<a href="index.html" class="logo"><strong>Young Ko</strong> at WCATY</a>
+									<ul class="icons">
+										<li><a href="#" class="icon brands fa-twitter"><span class="label">Twitter</span></a></li>
+										<li><a href="#" class="icon brands fa-facebook-f"><span class="label">Facebook</span></a></li>
+										<li><a href="#" class="icon brands fa-snapchat-ghost"><span class="label">Snapchat</span></a></li>
+										<li><a href="#" class="icon brands fa-instagram"><span class="label">Instagram</span></a></li>
+										<li><a href="#" class="icon brands fa-medium-m"><span class="label">Medium</span></a></li>
+									</ul>
+								</header>
+
+							<!-- Content -->
+								<section>
+									<header class="main">
+										<h1>Day 9</h1>
+									</header>
+
+									<p> Wednesday, July 10, 2019 </p>
+
+									<h3>Schedule</h3>
+										<div class="row">
+											<div class="col-6 col-12-small">
+
+												<h4>Questions</h4>
+												<ol>
+													<li>What were the limitations of yesterday's ADS's?</li>
+													<li>What can we do with a graph?</li>
+													<li>Check-ins</li>
+												</ol>
+
+											</div>
+											<div class="col-6 col-12-small">
+
+												<h4>Concepts</h4>
+												<ul>
+													<li>Graphs (as an LL array)</li>
+													<li>Graphs (as a 2D array)</li>
+													<li>BFS, DFS, Pathfinding</li>
+													<li>Floyd Warshall VS Dijkstra</li>
+												</ul>
+
+											</div>
+										</div>
+
+									<span class="image main"><img src="images/pic11.jpg" alt="" /></span>
+
+									<!-- Content -->
+									<h2>Title</h2>
+									<p>Content</p>
+
+									<p id = "code">
+									<h2>Code</h2>
+									<p id = "Social.py">
+									<h4><i>Social.py</i></h4>
+									<p>Learned about </p>
+									<pre><code># Shim
+import json
+class js(object):
+  def __init__(self, *args, **kwargs):
+    for arg in args:
+      self.__dict__.update(arg)
+    self.__dict__.update(kwargs)
+  def __getitem__(self, name):
+    return self.__dict__.get(name, None)
+  def __setitem__(self, name, val):
+    return self.__dict__.__setitem__(name, val)
+  def __delitem__(self, name):
+    if self.__dict__.has_key(name):
+      del self.__dict__[name]
+  def __getattr__(self, name):
+    return self.__getitem__(name)
+  def __setattr__(self, name, val):
+    return self.__setitem__(name, val)
+  def __delattr__(self, name):
+    return self.__delitem__(name)
+  def __getstate__(self):
+    return self.__dict__
+  def __setstate__(self, d):
+    self.__dict__.update(d)
+  def __iter__(self):
+    return self.__dict__.__iter__()
+  def __repr__(self):
+    return self.__dict__.__repr__()
+  def __str__(self):
+    return self.__dict__.__str__()
+  @staticmethod
+  def ify(thing):
+    return json.loads(json.dumps(thing), object_hook=lambda d: js(d))
+
+# Load the data
+data = js.ify(json.load(open("sna.json", "r")))
+#print(data)
+
+# Loop through everything
+#for i in data.campers:
+#  for j in data.campers:
+#    print(i, j)
+#    print(data.friends[i][j])
+
+#1
+facebook = True
+for i in data.campers:
+    for j in data.campers:
+        if data.friends[i][j] != data.friends[j][i]:
+            print("Twitter style")
+            facebook = False
+if facebook:
+    print ("Facebook style")
+#Answer : Facebook style
+
+#2
+most_friends = ""
+most_num = 0
+
+for i in data.campers:
+    count_num = 0
+    for j in data.campers:
+        if data.friends[i][j]:
+            count_num += 1
+    if count_num > most_num:
+        most_num = count_num
+        most_friends = i
+print ("Most friends : {}".format(most_friends))
+#Answer : Bob
+
+#3
+least_friends = ""
+least_num = len(data.campers)
+
+for i in data.campers:
+    count_num = 0
+    for j in data.campers:
+        if data.friends[i][j]:
+            count_num += 1
+    if count_num < least_num:
+        least_num = count_num
+        least_friends = i
+print ("Least friends : {}".format(least_friends))
+#Answer : Georgia
+
+#4
+avg_num = 0
+sum_num = 0;
+
+for i in data.campers:
+    count_num = 0
+    for j in data.campers:
+        if data.friends[i][j]:
+            count_num += 1
+    sum_num = sum_num + count_num
+print ("Average : {}".format(sum_num / len(data.campers)))
+#Answer : 2.0
+
+#5
+total_num = 0
+sum_num = 0
+for k in data.campers:
+    count_num = 0
+    friend_num = 0
+    for i in data.campers:
+        if data.friends[k][i]:
+            friend_num += 1
+            for j in data.campers:
+                if data.friends[i][j]:
+                    count_num += 1
+    sum_num = count_num / friend_num
+    total_num = total_num + sum_num
+print ("Average : {}".format(total_num / len(data.campers)))
+#Answer : 2.23809
+
+#6
+all_case = 0
+case = 0
+for i in data.campers:
+    if i == "Alice":
+        for j in data.campers:
+            if data.friends[i][j]:
+                all_case += 1
+                case += 1
+    else:
+        for j in data.campers:
+            if data.friends[i][j]:
+                if j == "Alice":
+                    all_case += 1
+                    case += 1
+                else:
+                    all_case += 1
+
+print ("Probability : {}".format(case / all_case))
+#Answer : 0.28571
+									</code></pre>
+									<div class="box alt">
+										<div class="row gtr-50 gtr-uniform">
+											<div class="col-4"><span class="image fit"><a href="images/day9/social.png"><img src="images/day9/social.png" alt="" /></a></span></div>
+										</div>
+									</div>
+									<p id = "Celebrity.java">
+									<h4><i>Celebrity.java</i></h4>
+									<p>Learned about </p>
+									<pre><code>import java.util.Random;
+
+class Celebrity {
+  public static Random RNG = new Random();
+  public static void main(String[] args) {
+    String[] names = {
+      "Kyne",               // 0
+      "Jennifer",           // 1
+      "Grant",              // 2
+      "Mike",               // 3
+      "Frudu",              // 4
+      "August",             // 5
+      "Pepsi\u2122 Man",    // 6
+      "Koolaid\u2122 Woman" // 7
+    };
+
+    int V = names.length;
+    boolean[][] graph = new boolean[V][V];
+
+    // Java should do this for us:
+    // for (int i=0; i < V; ++i){
+    //   for (int j=0; j < V; ++j){
+    //     graph[i][j] = false;
+    //   }
+    // }
+
+    // Grant knows Pepsi Man
+    // [2] knows [6]
+    // graph[2][6] = true;
+    int E = 20;
+    for (int t=0; t < E; ++t){
+      int i = RNG.nextInt(V);
+      int j = RNG.nextInt(V);
+      graph[i][j] = true;
+    }
+
+    // Kyne [0] is the celebrity
+    if (RNG.nextDouble() < 0.5){
+      int C = RNG.nextInt(V);
+      for (int k=0; k < V; ++k){
+        graph[k][C] = true;
+        graph[C][k] = false;
+        graph[k][k] = false;
+      }
+    } else {
+      for (int k=0; k < V; ++k){
+        graph[k][k] = false;
+      }
+    }
+
+    // Print all who knows who?
+    for (int i=0; i < V; ++i){
+      for (int j=0; j < V; ++j){
+        if (graph[i][j]){
+          System.out.printf("%s knows %s.\n", names[i], names[j]);
+        }
+      }
+    }
+
+    int cand = 0;
+    for (int k=1; k < V; ++k){
+      if (graph[cand][k]){
+        cand = k;
+      }
+    }
+
+    System.out.printf("I think the celebrity is %s.\n", names[cand]);
+
+    boolean is_actually_celebrity = true;
+    for (int k=0; k < V; ++k){
+      if (cand != k){
+        if (graph[cand][k]){
+          is_actually_celebrity = false;
+          break;
+        }
+
+        if (!graph[k][cand]){
+          is_actually_celebrity = false;
+          break;
+        }
+      }
+    }
+
+    if (is_actually_celebrity){
+      System.out.println("I was right.");
+    } else {
+      System.out.println("I was mistaken.");
+    }
+  }
+}
+									</code></pre>
+									<div class="box alt">
+										<div class="row gtr-50 gtr-uniform">
+											<div class="col-4"><span class="image fit"><a href="images/day9/celebrity.png"><img src="images/day9/celebrity.png" alt="" /></a></span></div>
+										</div>
+									</div>
+									<p id = "Uno.java">
+									<h4><i>Uno.java</i></h4>
+									<p>Learned about </p>
+									<pre><code>import java.util.*;
+
+class Main{
+  public static void main(String[] args) {
+    Scanner kb = new Scanner(System.in);
+    System.out.print("Enter L : ");
+    int L = kb.nextInt();
+    System.out.print("Enter R : ");
+    int G = kb.nextInt();
+    int K = 1;
+
+    double max_prob = 0;
+    int num = 1;
+    double prob_sum = 0;
+
+    double probability = 0;
+
+    System.out.println("");
+    for (K = 1; K < 7; K++){
+      prob_sum = prob_sum + Probability(K, L, G);
+    }
+    System.out.println("Prob_sum = " + prob_sum);
+    for (K = 1; K < 7; K++){
+      System.out.printf("Probability of K to be '%d' = %.7f\n", K, Probability(K, L, G) / prob_sum);
+      if (Probability(K, L, G) / prob_sum > max_prob){
+        max_prob = Probability(K, L, G) / prob_sum;
+        num = K;
+      }
+    }
+    System.out.println("====================");
+    System.out.printf("Highest probability : %d (%.7f)\n", num, max_prob);
+  }
+  public static double Probability(int K, int L, int G){
+    double less = (K - 1) / 6.0;
+    double greater = (6 - K) / 6.0;
+
+    double less_prob = Math.pow(less, L);
+    double greater_prob = Math.pow(greater, G);
+    double prob = less_prob * greater_prob;
+
+    return prob;
+  }
+}
+									</code></pre>
+									<div class="box alt">
+										<div class="row gtr-50 gtr-uniform">
+											<div class="col-4"><span class="image fit"><a href="images/day9/uno.png"><img src="images/day9/uno.png" alt="" /></a></span></div>
+										</div>
+									</div>
+								</section>
+
+						</div>
+					</div>
+
+				<!-- Sidebar -->
+					<div id="sidebar">
+						<div class="inner">
+
+							<!-- Search -->
+								<section id="search" class="alt">
+									<form method="post" action="#">
+										<input type="text" name="query" id="query" placeholder="Search" />
+									</form>
+								</section>
+
+							<!-- Menu -->
+								<nav id="menu">
+									<header class="major">
+										<h2>Menu</h2>
+									</header>
+									<ul>
+										<li><a href="index.html">Homepage</a></li>
+										<li><a href="about_me.html">About me</a></li>
+										<li><a href="about_ksa.html">About KSA</a></li>
+										<li><a href="about_wcaty.html">About WCATY</a></li>
+										<li>
+											<span class="opener">Portfolio - Week 1</span>
+											<ul>
+												<li><a href="day0.html">Day 0</a></li>
+												<li><a href="day1.html">Day 1</a></li>
+												<li><a href="day2.html">Day 2</a></li>
+												<li><a href="day3.html">Day 3</a></li>
+												<li><a href="day4.html">Day 4</a></li>
+												<li><a href="day5.html">Day 5</a></li>
+											</ul>
+										</li>
+										<li>
+											<span class="opener">Portfolio - Week 2</span>
+											<ul>
+												<li><a href="day6.html">Day 6</a></li>
+												<li><a href="day7.html">Day 7</a></li>
+												<li><a href="day8.html">Day 8</a></li>
+												<li><a href="day9.html">Day 9</a></li>
+												<li><a href="day10.html">Day 10</a></li>
+												<li><a href="day11.html">Day 11</a></li>
+											</ul>
+										</li>
+										<li>
+											<span class="opener">Portfolio - Week 3</span>
+											<ul>
+												<li><a href="day12.html">Day 12</a></li>
+												<li><a href="day13.html">Day 13</a></li>
+												<li><a href="day14.html">Day 14</a></li>
+												<li><a href="day15.html">Day 15</a></li>
+												<li><a href="day16.html">Day 16</a></li>
+												<li><a href="day17.html">Day 17</a></li>
+											</ul>
+										</li>
+										<li>
+											<span class="opener">Projects</span>
+											<ul>
+												<li><a href="pikachu.html">Project Pikachu</a></li>
+												<li><a href="portfolio.html">Project Portfolio</a></li>
+												<li><a href="final.html">Final group project</a></li>
+											</ul>
+										</li>
+									</ul>
+								</nav>
+
+							<!-- Section -->
+							
+								<section>
+									<header class="major">
+										<h2>Important News</h2>
+									</header>
+									<div class="mini-posts">
+										<article>
+											<a href="#" class="image"><img src="images/pic07.jpg" alt="" /></a>
+											<p>July 20th, finally the WCATY camp ends.</p>
+										</article>
+										
+									</div>
+									<ul class="actions">
+										<li><a href="about_wcaty.html" class="button">More</a></li>
+									</ul>
+								</section>
+							
+
+							<!-- Section -->
+								<section>
+									<header class="major">
+										<h2>Get in touch</h2>
+									</header>
+									<p>You can contact me through the contact information below.</p>
+									<ul class="contact">
+										<li class="icon solid fa-envelope"><a href="#">ksa18ky@gmail.com</a></li>
+										<li class="icon solid fa-phone">(+82)10-9984-1915</li>
+										<li class="icon solid fa-home">31, Myeongdal-ro 6-gil, Seocho-gu<br />
+										Seoul, Republic of Korea</li>
+									</ul>
+								</section>
+								
+								<section>
+								<header class="major">
+									<h2>Shortcuts</h2>
+								</header>
+								<p>
+									<a href = "#top">Top</a><br><br>
+									<a href = "#code">Code</a><br>
+									- <a href = "#Social.py">Social.py</a><br>
+									- <a href = "#Celebrity.java">Celebrity.java</a><br>
+									- <a href = "#Uno.java">Uno.java</a>
+								</p>
+								</section>
+
+								<footer id="footer">
+									<p class="copyright">&copy; Young Ko. All rights reserved. <br />
+									Demo Images: <a href="https://unsplash.com">Unsplash</a>. Design: <a href="https://html5up.net">HTML5 UP</a>.</p>
+								</footer>
+
+						</div>
+					</div>
+
+			</div>
+
+		<!-- Scripts -->
+			<script src="assets/js/jquery.min.js"></script>
+			<script src="assets/js/browser.min.js"></script>
+			<script src="assets/js/breakpoints.min.js"></script>
+			<script src="assets/js/util.js"></script>
+			<script src="assets/js/main.js"></script>
+
+	</body>
+</html>

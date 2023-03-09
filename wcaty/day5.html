@@ -1,0 +1,428 @@
+<!DOCTYPE HTML>
+<!--
+	Editorial by HTML5 UP
+	html5up.net | @ajlkn
+	Free for personal and commercial use under the CCA 3.0 license (html5up.net/license)
+-->
+<html>
+	<head>
+		<title>Day 5</title>
+		<meta charset="utf-8" />
+		<meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no" />
+		<link rel="stylesheet" href="assets/css/main.css" />
+	</head>
+	<body class="is-preload">
+
+		<!-- Wrapper -->
+			<div id="wrapper">
+			<p id = "top">
+
+				<!-- Main -->
+					<div id="main">
+						<div class="inner">
+
+							<!-- Header -->
+								<header id="header">
+									<a href="index.html" class="logo"><strong>Young Ko</strong> at WCATY</a>
+									<ul class="icons">
+										<li><a href="#" class="icon brands fa-twitter"><span class="label">Twitter</span></a></li>
+										<li><a href="#" class="icon brands fa-facebook-f"><span class="label">Facebook</span></a></li>
+										<li><a href="#" class="icon brands fa-snapchat-ghost"><span class="label">Snapchat</span></a></li>
+										<li><a href="#" class="icon brands fa-instagram"><span class="label">Instagram</span></a></li>
+										<li><a href="#" class="icon brands fa-medium-m"><span class="label">Medium</span></a></li>
+									</ul>
+								</header>
+
+							<!-- Content -->
+								<section>
+									<header class="main">
+										<h1>Day 5</h1>
+									</header>
+
+									<p> Friday, July 5, 2019 </p>
+
+									<h3>Schedule</h3>
+										<div class="row">
+											<div class="col-6 col-12-small">
+
+												<h4>Questions</h4>
+												<ol>
+													<li>How can I write less code?</li>
+													<li>How can I say my code is good?</li>
+												</ol>
+
+											</div>
+											<div class="col-6 col-12-small">
+
+												<h4>Concepts</h4>
+												<ul>
+													<li>Nested and mixed control structures</li>
+													<li>Methods</li>
+													<li>Programming for other programmers</li>
+													<li>Call stack</li>
+													<li>Scope</li>
+													<li>Big-O due to other's code, from the other perspective</li>
+												</ul>
+
+											</div>
+										</div>
+
+									<span class="image main"><img src="images/pic11.jpg" alt="" /></span>
+
+									<!-- Content -->
+									<h2>Title</h2>
+									<p>Content</p>
+
+									<p id = "code">
+									<h2>Code</h2>
+									<p id = "Fib.java">
+									<h4><i>Fib.java</i></h4>
+									<p>Learned about </p>
+									<pre><code>import java.util.*;
+
+class Fib {
+  public static void main(String[] args) {
+    long first = 0;
+    long second = 1;
+    long sum = 0;
+
+    Scanner kb = new Scanner(System.in);
+    System.out.print("How many? ");
+    long num = kb.nextInt();
+
+    for (int i = 0; i < num; i++){
+      if (i == 0){
+        sum = 0;
+        System.out.println(sum);
+      } else if (i == 1){
+        sum = 1;
+      } else {
+        System.out.println(sum);
+        sum = first + second;
+        first = second;
+        second = sum;
+      }
+    }
+  }
+}
+									</code></pre>
+									<div class="box alt">
+										<div class="row gtr-50 gtr-uniform">
+											<div class="col-4"><span class="image fit"><a href="images/day5/fib.png"><img src="images/day5/fib.png" alt="" /></a></span></div>
+										</div>
+									</div>
+									<p id = "Cooking_Game.java">
+									<h4><i>Cooking_Game.java</i></h4>
+									<p>Learned about </p>
+									<pre><code>import java.util.Scanner;
+import java.util.Random;
+
+class Main {
+  static Random RNG = new Random();
+
+  /**
+  * Returns the string 'cheese'
+  */
+
+  //Young
+  public static String grabCheese() {
+    return "cheese";
+  }
+
+  /**
+  * Returns the string 'lettuce'
+  */
+  
+  //Eugene
+  public static String grabLettuce() {
+    return "lettuce";
+  }
+
+  /**
+  * Returns the string 'red tomato' 80% of the time,
+  * and 'green tomato' the other 20% of the time,
+  * determined randomly
+  */
+
+  //Eugene
+  public static String grabATomato() {
+    int pctg = RNG.nextInt(10);
+    
+    if (pctg < 8) {
+      return "red tomato";
+    }
+    else {
+      return "green tomato";
+    }
+  }
+
+  /**
+  * Returns the string 'top bun' when the given
+  * boolean is_top is true, otherwise 'bottom bun'
+  */
+
+  //Young
+  public static String grabABun(boolean is_top) {
+    if(is_top){
+      return "top bun";
+    } else {
+      return "bottom bun";
+    }
+  }
+
+  /**
+  * Returns the given ingred string with the word 'chopped' added to the beginning
+  */
+
+  //Eugene
+  public static String chopIngredient(String ingred) {
+    String ret = "chopped " + ingred;
+    return ret ;
+  }
+
+  /**
+  * Returns the given ingred string with the word 'sliced' added to the beginning
+  */
+
+  //Musong
+  public static String sliceIngredient(String ingred) {
+    return "sliced " + ingred;
+  }
+
+  /**
+  * Returns the given ingred string with either the word 'rare', 'well-done', or so on,
+  * based on the value of the given time integer: 0 means rare, 5 means well-done, and 1-4 mean
+  * the values in between
+  */
+  
+  //Musong
+  public static String cookIngredient(String ingred, int time) {
+    String cooked = "";
+    if(time == 0){
+      cooked = "rare ";
+    }
+    else if(time >= 1 && time =< 4){
+      cooked = "mean ";
+    }
+    else if(time ==5){
+      cooked = "well-done ";
+    }
+    return cooked + ingred;
+  }
+
+  /**
+  * Returns a string of comma-separated values listing the ingredients
+  * of a burger, in order and how they have been prepared, as returned
+  * by the methods aboved, given the time integer of how well-done to cook
+  * the burger
+  */
+  
+  //Eugene
+  public static String buildABurger(int time) {
+    String babret = grabABun(true)+", "+sliceIngredient(grabCheese())+", "+chopIngredient(grabLettuce())+",
+	"+sliceIngredient(grabATomato())+", "+cookIngredient("hamburger patty", time)+", "+grabABun(false);
+    return babret;
+  }
+
+  /**
+  * First prints a message greeting the user, then prompts them to input
+  * a time integer for how well-done to cook the burger. As long as this value
+  * is not an integer or is not in the range 0-5, it politely prompts them
+  * for the value again. Then it calls build_a_burger and displays the string
+  * returned from there with 'Apologies for the wait, here is your' added to
+  * the beginning. Finally, it prompts the user to input a rating integer for
+  * how well their service was today, 1-10, with 10 being the best. As long
+  * as this value is not an integer or is not in the range 1-10, it politely
+  * prompts them for the value again
+  */
+  
+  //Musong
+  public static int serveCustomer() {
+    Scanner kb = new Scanner(System.in);
+    String time;
+    String ratings;
+
+    System.out.println("Welcome to my restaurant!! Please enter how much time(0-5) for how well-done to cook the burger.");
+    while(true){
+      time = kb.nextLine();
+      if(time.equals("0") || time.equals("1") || time.equals("2") || time.equals("3") || time.equals("4") || time.equals("5")){
+        break;
+      }
+      System.out.println("Please make sure your input is integer(0-5). Sorry.");
+    }
+    System.out.println("Apologies for the wait, here is your " + buildABurger(Integer.parseInt(time)));
+    
+    System.out.println("Please enter your ratings(1-10) of your burger. Thank you.");
+    while(true){
+      ratings = kb.nextLine();
+      if(ratings.equals("1") || ratings.equals("2") || ratings.equals("3") || ratings.equals("4") || ratings.equals("5") ||
+	  ratings.equals("6") || ratings.equals("7") || ratings.equals("8") || ratings.equals("9") || ratings.equals("10")){
+        break;
+      }
+      System.out.println("Please make sure your input is integer(1-10). Sorry.");
+    }
+    return Integer.parseInt(ratings);
+  }
+
+  /**
+  * Returns the average value returned by ten calls of serve_customer
+  */
+  
+  //Young
+  public static double runRestaurant() {
+    int sum = 0;
+    double avg;
+    for (int i = 0; i < 10; i++){
+      sum = sum + serveCustomer(); 
+    }
+    avg = sum / 10.0;
+    
+    return avg;
+  }
+
+  // The main, don't edit this
+  public static void main(String[] args) {
+    System.out.printf("Our average rating for today was %.4f",
+      runRestaurant());
+  }
+}
+									</code></pre>
+									<div class="box alt">
+										<div class="row gtr-50 gtr-uniform">
+											<div class="col-4"><span class="image fit"><a href="images/day5/cooking.png"><img src="images/day5/cooking.png" alt="" /></a></span></div>
+										</div>
+									</div>
+								</section>
+
+						</div>
+					</div>
+
+				<!-- Sidebar -->
+					<div id="sidebar">
+						<div class="inner">
+
+							<!-- Search -->
+								<section id="search" class="alt">
+									<form method="post" action="#">
+										<input type="text" name="query" id="query" placeholder="Search" />
+									</form>
+								</section>
+
+							<!-- Menu -->
+								<nav id="menu">
+									<header class="major">
+										<h2>Menu</h2>
+									</header>
+									<ul>
+										<li><a href="index.html">Homepage</a></li>
+										<li><a href="about_me.html">About me</a></li>
+										<li><a href="about_ksa.html">About KSA</a></li>
+										<li><a href="about_wcaty.html">About WCATY</a></li>
+										<li>
+											<span class="opener">Portfolio - Week 1</span>
+											<ul>
+												<li><a href="day0.html">Day 0</a></li>
+												<li><a href="day1.html">Day 1</a></li>
+												<li><a href="day2.html">Day 2</a></li>
+												<li><a href="day3.html">Day 3</a></li>
+												<li><a href="day4.html">Day 4</a></li>
+												<li><a href="day5.html">Day 5</a></li>
+											</ul>
+										</li>
+										<li>
+											<span class="opener">Portfolio - Week 2</span>
+											<ul>
+												<li><a href="day6.html">Day 6</a></li>
+												<li><a href="day7.html">Day 7</a></li>
+												<li><a href="day8.html">Day 8</a></li>
+												<li><a href="day9.html">Day 9</a></li>
+												<li><a href="day10.html">Day 10</a></li>
+												<li><a href="day11.html">Day 11</a></li>
+											</ul>
+										</li>
+										<li>
+											<span class="opener">Portfolio - Week 3</span>
+											<ul>
+												<li><a href="day12.html">Day 12</a></li>
+												<li><a href="day13.html">Day 13</a></li>
+												<li><a href="day14.html">Day 14</a></li>
+												<li><a href="day15.html">Day 15</a></li>
+												<li><a href="day16.html">Day 16</a></li>
+												<li><a href="day17.html">Day 17</a></li>
+											</ul>
+										</li>
+										<li>
+											<span class="opener">Projects</span>
+											<ul>
+												<li><a href="pikachu.html">Project Pikachu</a></li>
+												<li><a href="portfolio.html">Project Portfolio</a></li>
+												<li><a href="final.html">Final group project</a></li>
+											</ul>
+										</li>
+									</ul>
+								</nav>
+
+							<!-- Section -->
+							
+								<section>
+									<header class="major">
+										<h2>Important News</h2>
+									</header>
+									<div class="mini-posts">
+										<article>
+											<a href="#" class="image"><img src="images/pic07.jpg" alt="" /></a>
+											<p>July 20th, finally the WCATY camp ends.</p>
+										</article>
+										
+									</div>
+									<ul class="actions">
+										<li><a href="about_wcaty.html" class="button">More</a></li>
+									</ul>
+								</section>
+							
+
+							<!-- Section -->
+								<section>
+									<header class="major">
+										<h2>Get in touch</h2>
+									</header>
+									<p>You can contact me through the contact information below.</p>
+									<ul class="contact">
+										<li class="icon solid fa-envelope"><a href="#">ksa18ky@gmail.com</a></li>
+										<li class="icon solid fa-phone">(+82)10-9984-1915</li>
+										<li class="icon solid fa-home">31, Myeongdal-ro 6-gil, Seocho-gu<br />
+										Seoul, Republic of Korea</li>
+									</ul>
+								</section>
+								
+								<section>
+								<header class="major">
+									<h2>Shortcuts</h2>
+								</header>
+								<p>
+									<a href = "#top">Top</a><br><br>
+									<a href = "#code">Code</a><br>
+									- <a href = "#Fib.java">Fib.java</a><br>
+									- <a href = "#Cooking_Game.java">Cooking_Game.java</a><br>
+								</p>
+								</section>
+
+								<footer id="footer">
+									<p class="copyright">&copy; Young Ko. All rights reserved. <br />
+									Demo Images: <a href="https://unsplash.com">Unsplash</a>. Design: <a href="https://html5up.net">HTML5 UP</a>.</p>
+								</footer>
+
+						</div>
+					</div>
+
+			</div>
+
+		<!-- Scripts -->
+			<script src="assets/js/jquery.min.js"></script>
+			<script src="assets/js/browser.min.js"></script>
+			<script src="assets/js/breakpoints.min.js"></script>
+			<script src="assets/js/util.js"></script>
+			<script src="assets/js/main.js"></script>
+
+	</body>
+</html>

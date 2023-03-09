@@ -1,0 +1,459 @@
+<!DOCTYPE HTML>
+<!--
+	Editorial by HTML5 UP
+	html5up.net | @ajlkn
+	Free for personal and commercial use under the CCA 3.0 license (html5up.net/license)
+-->
+<html>
+	<head>
+		<title>Day 15</title>
+		<meta charset="utf-8" />
+		<meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no" />
+		<link rel="stylesheet" href="assets/css/main.css" />
+	</head>
+	<body class="is-preload">
+
+		<!-- Wrapper -->
+			<div id="wrapper">
+			<p id = "top">
+
+				<!-- Main -->
+					<div id="main">
+						<div class="inner">
+
+							<!-- Header -->
+								<header id="header">
+									<a href="index.html" class="logo"><strong>Young Ko</strong> at WCATY</a>
+									<ul class="icons">
+										<li><a href="#" class="icon brands fa-twitter"><span class="label">Twitter</span></a></li>
+										<li><a href="#" class="icon brands fa-facebook-f"><span class="label">Facebook</span></a></li>
+										<li><a href="#" class="icon brands fa-snapchat-ghost"><span class="label">Snapchat</span></a></li>
+										<li><a href="#" class="icon brands fa-instagram"><span class="label">Instagram</span></a></li>
+										<li><a href="#" class="icon brands fa-medium-m"><span class="label">Medium</span></a></li>
+									</ul>
+								</header>
+
+							<!-- Content -->
+								<section>
+									<header class="main">
+										<h1>Day 15</h1>
+									</header>
+
+									<p> Wednesday, July 17, 2019 </p>
+
+									<h3>Schedule</h3>
+										<h4>Questions</h4>
+										<ol>
+											<li>How do I apply CS to.. (One or more of the following list, as selected by the students)</li>
+												<ul>
+													<li>Science</li>
+													<li>Art</li>
+													<li>News</li>
+													<li>Physical Activity</li>
+													<li>Healthcare</li>
+													<li>Business</li>
+												</ul>
+										</ol>
+
+									<span class="image main"><a href="images/day15/1.PNG"><img src="images/day15/1.PNG" alt="" /></a></span>
+
+									<!-- Content -->
+									<h2>Title</h2>
+									<p>Content</p>
+
+									<p id = "code">
+									<h2>Code</h2>
+									<p id = "Sphere.py">
+									<h4><i>Sphere.py</i></h4>
+									<p>Learned about </p>
+									<pre><code>#------------------------------------------------------------------------------
+# Name:        pychrono example
+# Purpose:
+#
+# Author:      Alessandro Tasora
+#
+# Created:     1/01/2019
+# Copyright:   (c) ProjectChrono 2019
+#
+#
+# This file shows how to
+#   - create a small stack of bricks,
+#   - create a support that shakes like an earthquake, with motion function
+#   - simulate the bricks that fall
+#-------------------------------------------------------------------------------
+
+
+import pychrono.core as chrono
+import pychrono.irrlicht as chronoirr
+
+
+# Change this path to asset path, if running from other working dir. 
+# It must point to the data folder, containing GUI assets (textures, fonts, meshes, etc.)
+chrono.SetChronoDataPath("C:/users/dell1/Downloads/chrono/data/")
+
+# ---------------------------------------------------------------------
+#
+#  Create the simulation system and add items
+#
+
+my_system = chrono.ChSystemNSC()
+
+
+# Set the default outward/inward shape margins for collision detection,
+# this is epecially important for very large or very small objects.
+chrono.ChCollisionModel.SetDefaultSuggestedEnvelope(0.001)
+chrono.ChCollisionModel.SetDefaultSuggestedMargin(0.001)
+
+# Maybe you want to change some settings for the solver. For example you
+# might want to use SetMaxItersSolverSpeed to set the number of iterations
+# per timestep, etc.
+
+#my_system.SetSolverType(chrono.ChSolver.Type_BARZILAIBORWEIN) # precise, more slow
+my_system.SetMaxItersSolverSpeed(70)
+
+
+
+# Create a contact material (surface property)to share between all objects.
+# The rolling and spinning parameters are optional - if enabled they double
+# the computational time.
+brick_material = chrono.ChMaterialSurfaceNSC()
+brick_material.SetFriction(0.5)
+brick_material.SetDampingF(0.2)
+brick_material.SetCompliance (0.0000001)
+brick_material.SetComplianceT(0.0000001)
+# brick_material.SetRollingFriction(rollfrict_param)
+# brick_material.SetSpinningFriction(0)
+# brick_material.SetComplianceRolling(0.0000001)
+# brick_material.SetComplianceSpinning(0.0000001)
+
+
+
+# Create the set of bricks in a vertical stack, along Y axis
+
+nbricks_on_x = 1
+nbricks_on_y = 1
+
+size_brick_x = 0.28
+size_brick_y = 0.12
+size_brick_z = 0.12
+density_brick = 1000;    # kg/m^3
+mass_brick = density_brick * size_brick_x * size_brick_y * size_brick_z;
+inertia_brick = 2/5*(pow(size_brick_x,2))*mass_brick; # to do: compute separate xx,yy,zz inertias
+
+
+for ix in range(0,nbricks_on_x):
+    for iy in range(0,nbricks_on_y):
+        # create it
+        body_brick = chrono.ChBody()
+        # set initial position
+        body_brick.SetPos(chrono.ChVectorD(ix*size_brick_x, 7.85, -0.750))
+        # set mass properties
+        body_brick.SetMass(mass_brick)
+        body_brick.SetInertiaXX(chrono.ChVectorD(inertia_brick,inertia_brick,inertia_brick))
+        # set collision surface properties
+        body_brick.SetMaterialSurface(brick_material)
+
+        # Collision shape
+        body_brick.GetCollisionModel().ClearModel()
+        body_brick.GetCollisionModel().AddSphere(size_brick_x/2) # must set half sizes
+        body_brick.GetCollisionModel().BuildModel()
+        body_brick.SetCollide(True)
+
+        # Visualization shape, for rendering animation
+        body_brick_shape = chrono.ChSphereShape()
+        body_brick_shape.GetSphereGeometry().rad = size_brick_x/2
+        if iy%2==0 :
+            body_brick_shape.SetColor(chrono.ChColor(0.65, 0.65, 0.6)) # set gray color only for odd bricks
+        body_brick.GetAssets().push_back(body_brick_shape)
+
+        my_system.Add(body_brick)
+
+
+# Create the room floor: a simple fixed rigid body with a collision shape
+# and a visualization shape
+
+body_floor = chrono.ChBody()
+body_floor.SetBodyFixed(True)
+body_floor.SetPos(chrono.ChVectorD(0, -2, 0 ))
+body_floor.SetMaterialSurface(brick_material)
+
+# Collision shape
+body_floor.GetCollisionModel().ClearModel()
+body_floor.GetCollisionModel().AddBox(3, 1, 10) # hemi sizes
+body_floor.GetCollisionModel().BuildModel()
+body_floor.SetCollide(True)
+
+# Visualization shape
+body_floor_shape = chrono.ChBoxShape()
+body_floor_shape.GetBoxGeometry().Size = chrono.ChVectorD(3, 1, 10)
+body_floor.GetAssets().push_back(body_floor_shape)
+
+body_floor_texture = chrono.ChTexture()
+body_floor_texture.SetTextureFilename('C:/users/dell1/Downloads/chrono/data/concrete.jpg')
+body_floor.GetAssets().push_back(body_floor_texture)
+
+my_system.Add(body_floor)
+
+
+
+# Create the shaking table, as a box
+
+size_table_x = 1;
+size_table_y = 0.1;
+size_table_z = 1.8;
+
+size_table1_x = 1;
+size_table1_y = 0.1;
+size_table1_z = 2.0;
+
+body_table = chrono.ChBody()
+body_table.SetBodyFixed(True)
+body_table.SetPos(chrono.ChVectorD(0, 7.285, 0 ))
+body_table.SetRot(chrono.Q_from_AngX(0.25169))
+body_table.SetMaterialSurface(brick_material)
+
+# Collision shape
+body_table.GetCollisionModel().ClearModel()
+body_table.GetCollisionModel().AddBox(size_table_x/2, size_table_y/2, size_table_z/2) # hemi sizes
+body_table.GetCollisionModel().BuildModel()
+body_table.SetCollide(True)
+
+# Visualization shape
+body_table_shape = chrono.ChBoxShape()
+body_table_shape.GetBoxGeometry().Size = chrono.ChVectorD(size_table_x/2, size_table_y/2, size_table_z/2)
+body_table_shape.SetColor(chrono.ChColor(0.4,0.4,0.5))
+body_table.GetAssets().push_back(body_table_shape)
+
+body_table_texture = chrono.ChTexture()
+body_table_texture.SetTextureFilename('C:/users/dell1/Downloads/chrono/data/concrete.jpg')
+body_table.GetAssets().push_back(body_table_texture)
+
+my_system.Add(body_table)
+
+
+
+body1_table = chrono.ChBody()
+body1_table.SetBodyFixed(True)
+body1_table.SetPos(chrono.ChVectorD(0, 7.05, 1.75 ))
+body1_table.SetRot(chrono.Q_from_AngX(0.0))
+body1_table.SetMaterialSurface(brick_material)
+
+# Collision shape
+body1_table.GetCollisionModel().ClearModel()
+body1_table.GetCollisionModel().AddBox(size_table1_x/2, size_table1_y/2, size_table1_z/2) # hemi sizes
+body1_table.GetCollisionModel().BuildModel()
+body1_table.SetCollide(True)
+
+# Visualization shape
+body1_table_shape = chrono.ChBoxShape()
+body1_table_shape.GetBoxGeometry().Size = chrono.ChVectorD(size_table1_x/2, size_table1_y/2, size_table1_z/2)
+body1_table_shape.SetColor(chrono.ChColor(0.4,0.4,0.5))
+body1_table.GetAssets().push_back(body1_table_shape)
+
+body1_table_texture = chrono.ChTexture()
+body1_table_texture.SetTextureFilename('C:/users/dell1/Downloads/chrono/data/concrete.jpg')
+body1_table.GetAssets().push_back(body1_table_texture)
+
+my_system.Add(body1_table)
+
+
+
+# Create a constraint that blocks free 3 x y z translations and 3 rx ry rz rotations
+# of the table respect to the floor, and impose that the relative imposed position
+# depends on a specified motion law.
+
+
+# Note that you could use other types of ChFunction_ objects, or create
+# your custom function by class inheritance (see demo_python.py), or also
+# set a function for table rotation , etc.
+
+
+
+
+# ---------------------------------------------------------------------
+#
+#  Create an Irrlicht application to visualize the system
+#
+
+myapplication = chronoirr.ChIrrApp(my_system, 'PyChrono example', chronoirr.dimension2du(1024,768))
+
+myapplication.AddTypicalSky()
+myapplication.AddTypicalLogo('C:/users/dell1/Downloads/chrono/data/logo_pychrono_alpha.png')
+myapplication.AddTypicalCamera(chronoirr.vector3df(0.5,12.5,7.5))
+myapplication.AddTypicalLights()
+
+            # ==IMPORTANT!== Use this function for adding a ChIrrNodeAsset to all items
+                        # in the system. These ChIrrNodeAsset assets are 'proxies' to the Irrlicht meshes.
+                        # If you need a finer control on which item really needs a visualization proxy in
+                        # Irrlicht, just use application.AssetBind(myitem); on a per-item basis.
+
+myapplication.AssetBindAll();
+
+                        # ==IMPORTANT!== Use this function for 'converting' into Irrlicht meshes the assets
+                        # that you added to the bodies into 3D shapes, they can be visualized by Irrlicht!
+
+myapplication.AssetUpdateAll();
+
+# ---------------------------------------------------------------------
+#
+#  Run the simulation
+#
+
+myapplication.SetTimestep(0.001)
+myapplication.SetTryRealtime(True)
+
+hit = False
+
+while(myapplication.GetDevice().run()):
+    myapplication.BeginScene()
+    myapplication.DrawAll()
+    for substep in range(0,5):
+        myapplication.DoStep()
+        pos = body_brick.GetPos()
+        #print(pos)
+        if not hit and -1.01 < pos.y - size_brick_x/2 < -0.99:
+            print(pos)
+            print("The distance from the first position = {}m ({}cm).".format(pos.z/10, pos.z*10))
+            print("The distance from the wall = {}m ({}cm).".format((pos.z-2.89)/10, (pos.z-2.89)*10))
+            hit = True
+    myapplication.EndScene()
+									</code></pre>
+									<div class="box alt">
+										<div class="row gtr-50 gtr-uniform">
+											<div class="col-4"><span class="image fit"><a href="images/day15/1.PNG"><img src="images/day15/1.PNG" alt="" /></a></span></div>
+											<div class="col-4"><span class="image fit"><a href="images/day15/2.PNG"><img src="images/day15/2.PNG" alt="" /></a></span></div>
+										</div>
+									</div>
+								</section>
+
+						</div>
+					</div>
+
+				<!-- Sidebar -->
+					<div id="sidebar">
+						<div class="inner">
+
+							<!-- Search -->
+								<section id="search" class="alt">
+									<form method="post" action="#">
+										<input type="text" name="query" id="query" placeholder="Search" />
+									</form>
+								</section>
+
+							<!-- Menu -->
+								<nav id="menu">
+									<header class="major">
+										<h2>Menu</h2>
+									</header>
+									<ul>
+										<li><a href="index.html">Homepage</a></li>
+										<li><a href="about_me.html">About me</a></li>
+										<li><a href="about_ksa.html">About KSA</a></li>
+										<li><a href="about_wcaty.html">About WCATY</a></li>
+										<li>
+											<span class="opener">Portfolio - Week 1</span>
+											<ul>
+												<li><a href="day0.html">Day 0</a></li>
+												<li><a href="day1.html">Day 1</a></li>
+												<li><a href="day2.html">Day 2</a></li>
+												<li><a href="day3.html">Day 3</a></li>
+												<li><a href="day4.html">Day 4</a></li>
+												<li><a href="day5.html">Day 5</a></li>
+											</ul>
+										</li>
+										<li>
+											<span class="opener">Portfolio - Week 2</span>
+											<ul>
+												<li><a href="day6.html">Day 6</a></li>
+												<li><a href="day7.html">Day 7</a></li>
+												<li><a href="day8.html">Day 8</a></li>
+												<li><a href="day9.html">Day 9</a></li>
+												<li><a href="day10.html">Day 10</a></li>
+												<li><a href="day11.html">Day 11</a></li>
+											</ul>
+										</li>
+										<li>
+											<span class="opener">Portfolio - Week 3</span>
+											<ul>
+												<li><a href="day12.html">Day 12</a></li>
+												<li><a href="day13.html">Day 13</a></li>
+												<li><a href="day14.html">Day 14</a></li>
+												<li><a href="day15.html">Day 15</a></li>
+												<li><a href="day16.html">Day 16</a></li>
+												<li><a href="day17.html">Day 17</a></li>
+											</ul>
+										</li>
+										<li>
+											<span class="opener">Projects</span>
+											<ul>
+												<li><a href="pikachu.html">Project Pikachu</a></li>
+												<li><a href="portfolio.html">Project Portfolio</a></li>
+												<li><a href="final.html">Final group project</a></li>
+											</ul>
+										</li>
+									</ul>
+								</nav>
+
+							<!-- Section -->
+							
+								<section>
+									<header class="major">
+										<h2>Important News</h2>
+									</header>
+									<div class="mini-posts">
+										<article>
+											<a href="#" class="image"><img src="images/pic07.jpg" alt="" /></a>
+											<p>July 20th, finally the WCATY camp ends.</p>
+										</article>
+										
+									</div>
+									<ul class="actions">
+										<li><a href="about_wcaty.html" class="button">More</a></li>
+									</ul>
+								</section>
+							
+
+							<!-- Section -->
+								<section>
+									<header class="major">
+										<h2>Get in touch</h2>
+									</header>
+									<p>You can contact me through the contact information below.</p>
+									<ul class="contact">
+										<li class="icon solid fa-envelope"><a href="#">ksa18ky@gmail.com</a></li>
+										<li class="icon solid fa-phone">(+82)10-9984-1915</li>
+										<li class="icon solid fa-home">31, Myeongdal-ro 6-gil, Seocho-gu<br />
+										Seoul, Republic of Korea</li>
+									</ul>
+								</section>
+								
+								<section>
+								<header class="major">
+									<h2>Shortcuts</h2>
+								</header>
+								<p>
+									<a href = "#top">Top</a><br><br>
+									<a href = "#code">Code</a><br>
+									- <a href = "#Sphere.py">Sphere.py</a>
+								</p>
+								</section>
+
+								<footer id="footer">
+									<p class="copyright">&copy; Young Ko. All rights reserved. <br />
+									Demo Images: <a href="https://unsplash.com">Unsplash</a>. Design: <a href="https://html5up.net">HTML5 UP</a>.</p>
+								</footer>
+
+						</div>
+					</div>
+
+			</div>
+
+		<!-- Scripts -->
+			<script src="assets/js/jquery.min.js"></script>
+			<script src="assets/js/browser.min.js"></script>
+			<script src="assets/js/breakpoints.min.js"></script>
+			<script src="assets/js/util.js"></script>
+			<script src="assets/js/main.js"></script>
+
+	</body>
+</html>
