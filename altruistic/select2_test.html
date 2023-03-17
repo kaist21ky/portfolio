@@ -1,0 +1,211 @@
+<?php 
+  include 'inc_head.php';
+?>
+
+<!DOCTYPE HTML>
+<!--
+	Editorial by HTML5 UP
+	html5up.net | @ajlkn
+	Free for personal and commercial use under the CCA 3.0 license (html5up.net/license)
+-->
+<html>
+	<head>
+		<title>나너 해 (Altruistic)</title>
+		<meta charset="utf-8" />
+		<meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no" />
+		<link rel="stylesheet" href="assets/css/main.css" />
+		<link href="https://cdnjs.cloudflare.com/ajax/libs/select2/4.0.9/css/select2.min.css" rel="stylesheet" />
+	</head>
+	<body class="is-preload">
+
+		<!-- Wrapper -->
+			<div id="wrapper">
+			<p id = "top">
+
+				<!-- Main -->
+					<div id="main">
+						<div class="inner">
+
+							<!-- Header -->
+								<header id="header">
+									<a href="index.php" class="logo"><strong>나너 해</strong> Altruistic</a>
+								</header>
+
+							<!-- Content -->
+								<section>
+									<header class="main">
+										<h1>나너 해 추가하기</h1>
+									</header>
+									<form method="post" action="altruistic_input.php">
+										<div class="row gtr-uniform">
+											<div class="col-4 col-12-xsmall">
+												<input type="text" name="s_name" id="s_name" placeholder="과목명 (ex)미적분학1" required/>
+											</div>
+										</div>
+										<h3></h3>
+										<div class="row gtr-uniform">
+											<div class="col-4 col-12-xsmall">
+												<input type="text" name="me" id="me" placeholder="현재 분반 (ex)1" required/>
+											</div>
+										</div>
+										<h3></h3>
+										<div class="row gtr-uniform">
+											<div class="col-4 col-12-xsmall">
+												<input type="text" name="you" id="you" placeholder="희망 분반 (ex)2" required/>
+											</div>
+										</div>
+										<h3></h3>
+										<input type="submit" value="추가하기" class="primary" />
+										<h3></h3>
+
+										<select class="js-example-basic-single" name="state">
+											<option value="HA2109">TOPIK한국어</option>
+											<option value="CB4201">감염과면역</option>
+											<option value="HA6203">과학기술과사회</option>
+											<option value="HA6201">과학의역사와철학</option>
+											<option value="CB4202">기초뇌과학</option>
+											<option value="EPE2102">기초물리학(EC)</option>
+											<option value="CB4103">기초분석화학</option>
+											<option value="CB4102">기초유기화학</option>
+											<option value="MC3105">기초정수론</option>
+											<option value="EMC3105">기초정수론(EC)</option>
+											<option value="CB4104">나노화학의입문</option>
+											<option value="PE6201">도시계획과환경</option>
+											<option value="HA2103">문학과사회</option>
+											<option value="PE4102">물리학세미나</option>
+											<option value="PE5107">물리학특강(물리학의통합적문제해결기법)</option>
+											<option value="PE5105">물리학특강(전자회로의이해와응용)</option>
+											<option value="MC3107">미분방정식</option>
+											<option value="MC1108">미적분학1</option>
+											<option value="MC3110">미적분학3</option>
+											<option value="CB6202">법과학</option>
+											<option value="CB2202">생명과학탐구</option>
+											<option value="CB5202">생물학특강(생화학)</option>
+											<option value="HA2701">생활미술</option>
+											<option value="CB2102">생활속의화학</option>
+											<option value="HA2601">생활음악</option>
+											<option value="HA2801">생활체육1</option>
+											<option value="MC3111">선형대수</option>
+											<option value="EMC3111">선형대수(EC)</option>
+											<option value="CB4203">세포와질환</option>
+											<option value="HA2111">소통과화법</option>
+											<option value="MC2103">수학3</option>
+											<option value="MC2104">수학의활용</option>
+											<option value="MC6101">수학적모델링</option>
+											<option value="MC5105">수학특강(논리및집합)</option>
+											<option value="MC5106">수학특강(현대수학의흐름)</option>
+											<option value="HA2409">스페인언어와문화</option>
+											<option value="HA2304">시사영어</option>
+											<option value="MC4206">알고리즘</option>
+											<option value="PE6101">예술속의물리</option>
+											<option value="EPE3101">일반물리학1(EC)</option>
+											<option value="EPE3103">일반물리학2(EC)</option>
+											<option value="PE3102">일반물리학실험1</option>
+											<option value="PE3104">일반물리학실험2</option>
+											<option value="CB3201">일반생물학1</option>
+											<option value="CB3202">일반생물학실험</option>
+											<option value="PE3203">일반지구과학</option>
+											<option value="PE3204">일반지구과학실험</option>
+											<option value="PE3201">일반천문학</option>
+											<option value="PE3202">일반천문학실험</option>
+											<option value="CB3101">일반화학1</option>
+											<option value="CB3103">일반화학2</option>
+											<option value="CB3102">일반화학실험1</option>
+											<option value="CB3104">일반화학실험2</option>
+											<option value="HA2407">일본언어와문화</option>
+											<option value="MC4205">자료구조</option>
+											<option value="CB6102">전기화학에너지시스템</option>
+											<option value="MC2201">정보과학3</option>
+											<option value="HA2408">중국언어와문화</option>
+											<option value="PE5204">지구과학특강(Urbanism, Environment, and Infrastructure)</option>
+											<option value="PE5203">지구과학특강(해양학)</option>
+											<option value="PE2202">지구환경과학</option>
+											<option value="MC6201">창의적문제해결기법</option>
+											<option value="PE2201">천체관측의기초</option>
+											<option value="PE2101">탐구물리</option>
+											<option value="MC3203">프로그래밍과문제해결</option>
+											<option value="PE4101">현대물리학개론</option>
+											<option value="CB4101">화학과에너지</option>
+											<option value="CB4106">화학세미나</option>
+											<option value="MC3108">확률및통계</option>
+										</select>
+
+								</section>
+
+						</div>
+					</div>
+
+				<!-- Sidebar -->
+					<div id="sidebar">
+						<div class="inner">
+							<section>
+								<?php
+									if ( $jb_login ) { echo '<h3>'.$_SESSION[ 'username' ].'님 안녕하세요</h3>';
+									?>
+									<h3><a href = "logout.php">로그아웃</a></h3>
+									<?
+										}
+									else {?>
+											<h3><a href = "login.php">로그인</a> or <a href = "sign_up.php">회원가입<a></h3>
+										<?
+									}
+								 ?>
+								</section>
+
+							<!-- Menu -->
+								<nav id="menu">
+									<header class="major">
+										<h2>Menu</h2>
+									</header>
+									<ul>
+										<li><a href="index.php">Homepage</a></li>
+										<li><a href="altruistic.php">나너 해</a></li>
+									</ul>
+								</nav>
+							
+
+									<header class="major">
+										<h2>Get in touch</h2>
+									</header>
+									<p>You can contact me through the contact information below. (Website developer)</p>
+									<ul class="contact">
+										<li class="icon solid fa-envelope"><a href="#">ksa18ky@gmail.com</a></li>
+										<li class="icon solid fa-home">47162 <br />
+										부산광역시 부산진구 백양관문로 105-47<br />
+										(당감동, 한국과학영재학교)</li>
+									</ul>
+
+								<footer id="footer">
+									<p class="copyright">&copy; Young Ko. All rights reserved. <br />
+									Demo Images: <a href="https://unsplash.com">Unsplash</a>. Design: <a href="https://html5up.net">HTML5 UP</a>.</p>
+								</footer>
+
+						</div>
+					</div>
+
+			</div>
+
+		<!-- Scripts -->
+			<script src="assets/js/jquery.min.js"></script>
+			<script src="assets/js/browser.min.js"></script>
+			<script src="assets/js/breakpoints.min.js"></script>
+			<script src="assets/js/util.js"></script>
+			<script src="assets/js/main.js"></script>
+
+			<script src="https://code.jquery.com/jquery-3.3.1.min.js"></script>
+			<!-- select2 javascript cdn -->
+			<script src="https://cdnjs.cloudflare.com/ajax/libs/select2/4.0.9/js/select2.min.js"></script>
+
+			<script>
+			$(document).ready(function() {
+				$('.js-example-basic-single').select2({
+				  placeholder: "Select an option",
+				  allowClear: true
+				});
+			});
+			</script>
+
+
+
+	</body>
+</html>
