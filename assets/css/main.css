@@ -2539,11 +2539,11 @@ input, select, textarea {
 			}
 
 				.wrapper.style1 .icon.major:before {
-					color: #6cb59b;
+					color: #abcf97;
 				}
 
 				.wrapper.style1-alt .icon.major:before {
-					color: #355b4e;
+					color: #6cb59b;
 				}
 
 				.wrapper.style2 .icon.major:before {
@@ -3243,11 +3243,11 @@ input, select, textarea {
 		}
 
 		.wrapper.style1 {
-			background-color: #6cb59b;
+			background-color: #abcf97;
 		}
 
 		.wrapper.style1-alt {
-			background-color: #355b4e;
+			background-color: #6cb59b;
 		}
 
 		.wrapper.style2 {
@@ -3527,7 +3527,7 @@ input, select, textarea {
 
 	#sidebar {
 		padding: 2.5em 2.5em 0.5em 2.5em ;
-		background: #abcf97;
+		background: #8998be;
 		cursor: default;
 		height: 100vh;
 		left: 0;
@@ -3745,7 +3745,7 @@ input, select, textarea {
 			font-size: 0.8em;
 			font-weight: bold;
 			letter-spacing: 0.25em;
-			line-height: 1.75;
+			line-height: 1.5;
 			outline: 0;
 			padding: 1.35em 0;
 			position: relative;
