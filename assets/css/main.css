@@ -101,7 +101,7 @@ input, select, textarea {
 	}
 
 	body {
-		background: #abcf97;
+		background: #355b4e;
 	}
 
 		body.is-preload *, body.is-preload *:before, body.is-preload *:after {
@@ -3373,7 +3373,7 @@ input, select, textarea {
 		display: -webkit-flex;
 		display: -ms-flex;
 		display: flex;
-		background-color: #9391c8;
+		background-color: #6cb59b;
 		cursor: default;
 		padding: 1.75em 2em;
 	}
