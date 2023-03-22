@@ -2,14 +2,12 @@
 
 /* Card */
     .card {
-        position: relative;
-        width: 33.33333%;
-        height: 0;
+        width: 200px;
+        height: 250px;
         perspective: 800px;
     }
     .card__inner {
-        position: absolute;
-        width: 100%;
+        position: relative;
         height: 100%;
         transform-style: preserve-3d;
         transition: transform 0.5s;
