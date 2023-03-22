@@ -44,12 +44,14 @@
 
 /* Card */
 	.card {
-		width: 200px;
-		height: 250px;
+		position: relative;
+		width: 33.33333%;
+		height: 0;
 		perspective: 800px;
 	}
 	.card__inner {
-		position: relative;
+		position: absolute;
+		width: 100%;
 		height: 100%;
 		transform-style: preserve-3d;
 		transition: transform 0.5s;
