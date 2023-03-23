@@ -3,11 +3,10 @@
 /* Card */
     .card {
         width: 33.33333%;
-        height: 0;
         perspective: 800px;
     }
     .card__inner {
-        position: relative;
+        position: absolute;
         height: 100%;
         transform-style: preserve-3d;
         transition: transform 0.5s;
