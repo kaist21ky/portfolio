@@ -11,7 +11,7 @@
         transform-style: preserve-3d;
         transition: transform 0.5s;
     }
-    .card:checked .card__inner {
+    .card:hover .card__inner {
         transform: rotateY(180deg);
     }
     .card__body {
