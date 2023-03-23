@@ -6,7 +6,7 @@
         perspective: 800px;
     }
     .card__inner {
-        position: absolute;
+        position: relative;
         height: 100%;
         transform-style: preserve-3d;
         transition: transform 0.5s;
